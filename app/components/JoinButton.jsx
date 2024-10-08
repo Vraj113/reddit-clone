@@ -6,6 +6,9 @@ const JoinButton = ({ slug }) => {
   const onJoin = async () => {
     await fetch("/api/join", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ slug }),
     });
     // const response = await res.json();
@@ -13,6 +16,9 @@ const JoinButton = ({ slug }) => {
   const isJoin = async () => {
     const res = await fetch("/api/join", {
       method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ slug }),
     });
     const response = await res.json();
