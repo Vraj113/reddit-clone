@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 const JoinButton = ({ slug }) => {
   const [joined, setJoined] = useState("");
   const onJoin = async () => {
-    await fetch("../api/join", {
+    await fetch("/api/join", {
       method: "POST",
       body: JSON.stringify({ slug }),
     });
