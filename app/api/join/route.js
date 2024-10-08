@@ -6,7 +6,9 @@ import prisma from "@/lib/prisma";
 export async function PUT(req) {
   const cookieStore = cookies();
   const body = await req.json();
-  const token = cookieStore.get("next-auth.session-token");
+  const token =
+    cookieStore.get("next-auth.session-token") ||
+    cookieStore.get("__Secure-next-auth.session-token");
 
   if (!token || !token.value) {
     return NextResponse.json({ message: "Token not found" }, { status: 401 });
@@ -37,7 +39,9 @@ export async function POST(req) {
   try {
     const cookieStore = cookies();
     const body = await req.json();
-    const token = cookieStore.get("next-auth.session-token");
+    const token =
+      cookieStore.get("next-auth.session-token") ||
+      cookieStore.get("__Secure-next-auth.session-token");
 
     if (!token || !token.value) {
       return NextResponse.json({ message: "Token not found" }, { status: 401 });
