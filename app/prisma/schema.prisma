@@ -19,7 +19,7 @@ model User {
   username      String          @default("")
   email         String?         @unique
   emailVerified DateTime?
-  image         String[]        @default([])
+  image         String?        @default("")
   joinedSubs    String[]        @default([])
   accounts      Account[]
   sessions      Session[]
