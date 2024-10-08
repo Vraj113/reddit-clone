@@ -11,7 +11,7 @@ const JoinButton = ({ slug }) => {
     // const response = await res.json();
   };
   const isJoin = async () => {
-    const res = await fetch("../api/join", {
+    const res = await fetch("/api/join", {
       method: "PUT",
       body: JSON.stringify({ slug }),
     });
