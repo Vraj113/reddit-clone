@@ -9,6 +9,7 @@ const JoinButton = ({ slug }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ slug }),
     });
     // const response = await res.json();
@@ -19,6 +20,7 @@ const JoinButton = ({ slug }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ slug }),
     });
     const response = await res.json();
