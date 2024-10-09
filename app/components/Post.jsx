@@ -47,10 +47,10 @@ const Post = ({
   }
 
   return (
-    <div className=" my-4 w-full border-b-2 hover:bg-gray-100 bg-white shadow-md  rounded-lg  ">
+    <div className=" md:w-[800px] w-full my-4  border-b-2 hover:bg-gray-100 bg-white shadow-md  rounded-lg  ">
       {" "}
       <Link href={`/r/${subredditId}/posts/${slug}`}>
-        <div className="  p-4  rounded-xl flex flex-col gap-y-3 md:w-[800px] w-full h-fit py-2 cursor-pointer">
+        <div className="  p-4  rounded-xl flex flex-col gap-y-3  h-fit py-2 cursor-pointer">
           <div className="text-sm">
             r/{subredditId} • {convertISOToRelativeTime(createdAt)} • Posted By{" "}
             <b>{postedBy}</b>

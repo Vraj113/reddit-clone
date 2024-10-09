@@ -179,7 +179,9 @@ export const Create = () => {
             data.type === "TEXT" ? "border-b-2 border-blue-700" : ""
           }`}
           onClick={() => {
-            setData({ ...data, type: "TEXT" });
+            setData({ ...data, link: "", description: "", type: "TEXT" });
+            setPreviewImage(null);
+            setSelectedImage(null);
           }}
         >
           Text
@@ -189,7 +191,7 @@ export const Create = () => {
             data.type === "IMAGE" ? "border-b-2 border-blue-700" : ""
           }`}
           onClick={() => {
-            setData({ ...data, type: "IMAGE" });
+            setData({ ...data, link: "", description: "", type: "IMAGE" });
           }}
         >
           Images
@@ -199,7 +201,9 @@ export const Create = () => {
             data.type === "LINK" ? "border-b-2 border-blue-700" : " "
           }`}
           onClick={() => {
-            setData({ ...data, type: "LINK" });
+            setData({ ...data, link: "", description: "", type: "LINK" });
+            setPreviewImage(null);
+            setSelectedImage(null);
           }}
         >
           Link
@@ -214,7 +218,7 @@ export const Create = () => {
               placeholder="Title"
               name="title"
               value={data.title}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
               onChange={onChange}
             />
           </div>
@@ -224,7 +228,7 @@ export const Create = () => {
               name="description"
               value={data.description}
               onChange={onChange}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
             ></textarea>
           </div>
         </div>
@@ -237,7 +241,7 @@ export const Create = () => {
               placeholder="Title"
               name="title"
               value={data.title}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
               onChange={onChange}
             />
           </div>{" "}
@@ -251,7 +255,7 @@ export const Create = () => {
             />
             <label
               htmlFor="imgInput"
-              className="border-2 border-blue-500 border-dashed w-full h-auto min-h-[200px] max-h-[500px] rounded-lg overflow-hidden justify-center items-center flex"
+              className="border-2 border-blue-500 border-dashed w-full md:w-[500px] h-auto min-h-[200px] max-h-[500px] rounded-lg overflow-hidden justify-center items-center flex"
             >
               {!previewImage && (
                 <div className="font-semibold w-fit">
@@ -263,7 +267,7 @@ export const Create = () => {
                   <img
                     src={previewImage}
                     alt="Selected"
-                    className="w-full h-full"
+                    className="w-full md:w-[500px] h-full"
                   />
                 </div>
               )}
@@ -279,7 +283,7 @@ export const Create = () => {
               placeholder="Title"
               name="title"
               value={data.title}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
               onChange={onChange}
             />
           </div>
@@ -288,7 +292,7 @@ export const Create = () => {
               placeholder="Link"
               name="link"
               value={data.link}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
               onChange={onChange}
             ></textarea>
           </div>

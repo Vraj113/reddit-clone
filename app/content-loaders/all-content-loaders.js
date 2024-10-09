@@ -8,7 +8,7 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 export const PostLoader = () => (
   <div
     id={Math.random()}
-    className="md:w-[800px] p-4 my-4  md:mx-24 mx-4 bg-white rounded-md shadow-md"
+    className="md:w-[800px] p-4 my-4    bg-white rounded-md shadow-md"
   >
     <ContentLoader
       uniqueKey={Math.random()}
