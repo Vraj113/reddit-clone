@@ -159,7 +159,7 @@ export const Create = () => {
     }
   };
   return (
-    <div className="flex-col flex gap-y-4 py-4 px-8 bg-zinc-50 h-full">
+    <div className="flex-col flex gap-y-4 py-4 px-8 bg-zinc-50 h-[88vh] overflow-hidden">
       <ToastContainer />
       <div className="font-semibold text-3xl">Create Post</div>
 
@@ -214,7 +214,7 @@ export const Create = () => {
               placeholder="Title"
               name="title"
               value={data.title}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-[500px] border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
               onChange={onChange}
             />
           </div>
@@ -224,7 +224,7 @@ export const Create = () => {
               name="description"
               value={data.description}
               onChange={onChange}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-[500px] border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
             ></textarea>
           </div>
         </div>
@@ -237,7 +237,7 @@ export const Create = () => {
               placeholder="Title"
               name="title"
               value={data.title}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-[500px] border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
               onChange={onChange}
             />
           </div>{" "}
@@ -251,7 +251,7 @@ export const Create = () => {
             />
             <label
               htmlFor="imgInput"
-              className="border-2 border-blue-500 border-dashed w-[500px] h-auto min-h-[200px] max-h-[500px] rounded-lg overflow-hidden justify-center items-center flex"
+              className="border-2 border-blue-500 border-dashed w-full h-auto min-h-[200px] max-h-[500px] rounded-lg overflow-hidden justify-center items-center flex"
             >
               {!previewImage && (
                 <div className="font-semibold w-fit">
@@ -279,7 +279,7 @@ export const Create = () => {
               placeholder="Title"
               name="title"
               value={data.title}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-[500px] border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
               onChange={onChange}
             />
           </div>
@@ -288,7 +288,7 @@ export const Create = () => {
               placeholder="Link"
               name="link"
               value={data.link}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-[500px] border-zinc-400 my-2"
+              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full border-zinc-400 my-2"
               onChange={onChange}
             ></textarea>
           </div>
