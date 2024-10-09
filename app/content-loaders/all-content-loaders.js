@@ -6,7 +6,7 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ShareIcon from "@mui/icons-material/Share";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 export const PostLoader = () => (
-  <div className="w-[800px] p-4 my-4   bg-white rounded-md shadow-md">
+  <div className="md:w-[800px] p-4 my-4   bg-white rounded-md shadow-md">
     <ContentLoader
       viewBox="0 0 380 80"
       backgroundColor="#b3b3b3"

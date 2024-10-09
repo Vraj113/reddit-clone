@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 const LeftNavBar = () => {
   const pathname = usePathname();
   return (
-    <div className="h-full p-4 text-lg fixed z-10 bg-white mt-16 ">
+    <div className="h-full p-4 text-lg fixed z-10 bg-white mt-16 hidden md:block">
       <Link href="/">
         <div
           className={`py-2 px-4 font-semibold  rounded my-2 min-w-48 cursor-pointer hover:bg-gray-100 ${

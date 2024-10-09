@@ -44,7 +44,7 @@ const JoinButton = ({ slug }) => {
             onJoin();
             setJoined(true);
           }}
-          className="py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl"
+          className="py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm md:text-xl"
         >
           Join
         </button>
@@ -55,7 +55,7 @@ const JoinButton = ({ slug }) => {
             onJoin();
             setJoined(false);
           }}
-          className="py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl"
+          className="py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm md:text-xl"
         >
           Joined
         </button>

@@ -7,7 +7,7 @@ const Posts = () => {
   const getPosts = async () => {
     const resonse = await fetch("api/posts", { method: "GET" });
     const data = await resonse.json();
-    console.log(data);
+
     setPostsData(data);
   };
   useEffect(() => {
@@ -15,7 +15,7 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className="ml-28">
+    <>
       {!postsData && (
         <>
           <PostLoader />
@@ -23,23 +23,24 @@ const Posts = () => {
           <PostLoader />
         </>
       )}
-
-      {postsData &&
-        postsData.map((post) => (
-          <Post
-            key={post.id}
-            title={post.title}
-            description={post.description}
-            link={post.link}
-            postedBy={post.postedBy}
-            votes={post.votes}
-            slug={post.slug}
-            createdAt={post.createdAt}
-            imageURL={post.imageURL}
-            subredditId={post.subredditId}
-          />
-        ))}
-    </div>
+      <div className="md:ml-28 m-4">
+        {postsData &&
+          postsData.map((post) => (
+            <Post
+              key={post.id}
+              title={post.title}
+              description={post.description}
+              link={post.link}
+              postedBy={post.postedBy}
+              votes={post.votes}
+              slug={post.slug}
+              createdAt={post.createdAt}
+              imageURL={post.imageURL}
+              subredditId={post.subredditId}
+            />
+          ))}
+      </div>
+    </>
   );
 };
 

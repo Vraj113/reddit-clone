@@ -1,14 +1,17 @@
 import React from "react";
 import ProfileToggle from "../components/ProfileToggle";
+import Link from "next/link";
 const NavBar = async () => {
   // console.log(session);
   return (
     <div className="flex justify-between px-10 py-2  border-b-2 h-fit items-center fixed w-full  bg-white  z-20">
-      <div>
-        <img src="/logo.png" className="h-16 w-auto" />
-      </div>
+      <Link href="/">
+        <div>
+          <img src="/logo.png" className="h-16 w-auto" />
+        </div>
+      </Link>
 
-      <div>
+      <div className="md:block hidden">
         <input
           type="text"
           name=""
