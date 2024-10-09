@@ -3,6 +3,7 @@ import "./globals.css";
 import NavBar from "./components/NavBar";
 import LeftNavBar from "./components/LeftNavBar";
 import { Providers } from "./components/provider/Provider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
             <LeftNavBar />
             <div className=" hidden md:block h-[100vh]"></div>
             <div className="mt-20 bg-zinc-50">{children}</div>
+            <SpeedInsights />
           </div>
         </body>
       </Providers>
