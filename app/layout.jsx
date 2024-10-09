@@ -28,10 +28,10 @@ export default function RootLayout({ children }) {
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <NavBar />
-          <div className="grid grid-flow-col md:grid-cols-[15%_85%]">
+          <div className="md:grid md:grid-flow-col md:grid-cols-[15%_85%]">
             <LeftNavBar />
-            <div className=" h-[100vh]"></div>
-            <div className="mt-20 bg-zinc-50">{children}</div>
+            <div className=" hidden md:block h-[100vh]"></div>
+            <div className="m  bg-zinc-50">{children}</div>
           </div>
         </body>
       </Providers>

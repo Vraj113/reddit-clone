@@ -16,7 +16,7 @@ const LinkPreview = ({ link }) => {
           throw new Error("Failed to fetch preview");
         }
         const data = await response.json();
-        console.log(data);
+
         setPreviewData(data);
       } catch (err) {
         console.error("Error fetching link preview:", err);

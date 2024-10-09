@@ -13,16 +13,16 @@ const Posts = () => {
   useEffect(() => {
     getPosts();
   }, []);
-
+  const timesToRender = 5;
   return (
     <>
-      {!postsData && (
-        <>
-          <PostLoader />
-          <PostLoader />
-          <PostLoader />
-        </>
-      )}
+      <div className="mt-20">
+        {!postsData &&
+          Array.from({ length: timesToRender }).map((_, index) => (
+            <PostLoader key={index} />
+          ))}
+      </div>
+
       <div className="md:ml-28 m-4">
         {postsData &&
           postsData.map((post) => (

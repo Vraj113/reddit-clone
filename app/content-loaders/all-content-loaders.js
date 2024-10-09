@@ -6,8 +6,12 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ShareIcon from "@mui/icons-material/Share";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 export const PostLoader = () => (
-  <div className="md:w-[800px] p-4 my-4   bg-white rounded-md shadow-md">
+  <div
+    id={Math.random()}
+    className="md:w-[800px] p-4 my-4  md:mx-24 mx-4 bg-white rounded-md shadow-md"
+  >
     <ContentLoader
+      uniqueKey={Math.random()}
       viewBox="0 0 380 80"
       backgroundColor="#b3b3b3"
       foregroundColor="#e6e6e6"
