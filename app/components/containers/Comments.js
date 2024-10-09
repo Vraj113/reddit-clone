@@ -1,9 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Comment from "../Comment";
+import {
+  CommentLoader,
+  PostLoader,
+} from "../../content-loaders/all-content-loaders";
 
 const Comments = ({ slug }) => {
-  const [commentsData, setCommentsData] = useState([]);
+  const [commentsData, setCommentsData] = useState(null);
   const [comment, setComment] = useState("");
   const getComments = async () => {
     const res = await fetch("../../../api/comments", {
@@ -55,17 +59,25 @@ const Comments = ({ slug }) => {
             Post
           </button>
         </div>
-        {commentsData.map((comment) => {
-          return (
-            <Comment
-              key={comment.id}
-              name={comment.postedByName}
-              email={comment.email}
-              content={comment.content}
-              postedOn={comment.createdAt}
-            />
-          );
-        })}
+        {!commentsData && (
+          <>
+            <CommentLoader />
+            <CommentLoader />
+            <CommentLoader />
+          </>
+        )}
+        {commentsData &&
+          commentsData.map((comment) => {
+            return (
+              <Comment
+                key={comment.id}
+                name={comment.postedByName}
+                email={comment.email}
+                content={comment.content}
+                postedOn={comment.createdAt}
+              />
+            );
+          })}
       </div>
     </div>
   );
