@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
           <div className="md:grid md:grid-flow-col md:grid-cols-[15%_85%]">
             <LeftNavBar />
             <div className=" hidden md:block h-[100vh]"></div>
-            <div className="m  bg-zinc-50">{children}</div>
+            <div className="mt-20 bg-zinc-50">{children}</div>
           </div>
         </body>
       </Providers>

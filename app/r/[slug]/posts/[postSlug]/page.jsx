@@ -34,7 +34,7 @@ const Post = async ({ params }) => {
   } else {
     return (
       <>
-        <div className="  p-4 border2  mt-8 shadow-lg  bg-white rounded-lg md:mx-28 mx-2">
+        <div className="  p-4 border2  md:mt-8 mt-24  shadow-lg  bg-white rounded-lg md:mx-28 mx-2">
           <div className="flex justify-between">
             <div className="flex items-center">
               <div>

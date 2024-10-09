@@ -28,7 +28,7 @@ const SubReddit = async ({ params }) => {
   }
 
   return (
-    <div className="md:mx-28 mx-2">
+    <div className="md:mx-28 md:mt-8 mt-24  mx-2">
       {subredditData && (
         <SubredditTop
           slug={params.slug}
