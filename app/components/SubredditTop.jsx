@@ -10,7 +10,7 @@ const SubredditTop = ({ slug, name, description, image, bannerImage }) => {
         <div className="flex items-center">
           <img
             src={image}
-            className="mdw-24   md:h-24 w-16 h-16 rounded-full"
+            className="md:w-24   md:h-24 w-16 h-16 rounded-full"
           />
           <div className="md:text-4xl text-2xl font-bold ml-4">r/{name}</div>
         </div>

@@ -10,6 +10,7 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import Link from "next/link";
 import LinkPreview from "@/app/components/LinkPreview";
 import Image from "next/image";
+
 const Post = async ({ params }) => {
   const post = await prisma.posts.findFirst({
     where: {

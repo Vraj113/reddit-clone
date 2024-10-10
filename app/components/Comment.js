@@ -6,7 +6,7 @@ import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ShareIcon from "@mui/icons-material/Share";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
-
+import { motion } from "framer-motion";
 const Comment = ({ name, content, postedOn }) => {
   function convertISOToRelativeTime(isoString) {
     const date = new Date(isoString);
@@ -35,7 +35,11 @@ const Comment = ({ name, content, postedOn }) => {
     return "just now"; // In case the time difference is very small
   }
   return (
-    <div>
+    <motion.div
+      initial={{ y: 20 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       {" "}
       <div className="bg-zinc-100 p-4 rounded-xl my-2">
         <div className="flex gap-x-5 text-xl items-center font-semibold">
@@ -73,7 +77,7 @@ const Comment = ({ name, content, postedOn }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
