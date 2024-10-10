@@ -7,6 +7,7 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ShareIcon from "@mui/icons-material/Share";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import LinkPreview from "./LinkPreview";
+import Image from "next/image";
 const Post = ({
   title,
   img,
@@ -56,17 +57,19 @@ const Post = ({
             <b>{postedBy}</b>
           </div>
           <div className="text-lg font-semibold">{title}</div>
-          {img && (
-            <img
-              className="rounded-xl"
-              src="https://preview.redd.it/was-rewatching-wandavision-and-noticed-this-black-heart-v0-5ftbeku9hqqd1.jpg?width=1080&crop=smart&auto=webp&s=0761e434a76e603e6964465bd1ee3e20f42d8183"
-            />
-          )}
+
           {description && <div className="text-xl">{description}</div>}
           {link && <LinkPreview link={link} />}
           {imageURL && (
-            <div className="flex justify-center ">
-              <img className="rounded-xl" src={imageURL} />
+            <div className="flex justify-center relative  max-h-[500px] w-full">
+              <Image
+                className="rounded-xl object-contain"
+                src={imageURL}
+                alt={title}
+                width={800}
+                height={500}
+                style={{ objectFit: "contain" }}
+              />
             </div>
           )}
         </div>

@@ -9,6 +9,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import Link from "next/link";
 import LinkPreview from "@/app/components/LinkPreview";
+import Image from "next/image";
 const Post = async ({ params }) => {
   const post = await prisma.posts.findFirst({
     where: {
@@ -21,9 +22,7 @@ const Post = async ({ params }) => {
     },
   });
 
-  console.log(post);
   if (!subredditData) {
-    // console.log();
     return (
       <>
         <div className="w-full h-full flex justify-center items-center text-4xl font-semibold">
@@ -59,7 +58,16 @@ const Post = async ({ params }) => {
           {post.link && <LinkPreview link={post.link} />}
           <div className="  overflow-hidden justify-center flex  ">
             {post.imageURL && (
-              <img className="max-h-[600px] rounded-xl" src={post.imageURL} />
+              <div className="flex justify-center relative  max-h-[600px] w-full">
+                <Image
+                  className="rounded-xl object-contain"
+                  src={post.imageURL}
+                  alt={post.title}
+                  width={800}
+                  height={500}
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
             )}
           </div>
           <div className="flex gap-x-2   border-2 rounded-full bg-zinc-50 w-fit p-2 border-zinc-500 m-4">

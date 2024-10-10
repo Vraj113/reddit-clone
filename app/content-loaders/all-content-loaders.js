@@ -6,17 +6,13 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ShareIcon from "@mui/icons-material/Share";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 export const PostLoader = () => (
-  <div
-    id={Math.random()}
-    className="md:w-[800px] p-4 my-4    bg-white rounded-md shadow-md"
-  >
+  <div className="md:w-[800px] p-4 my-4    bg-white rounded-md shadow-md">
     <ContentLoader
-      uniqueKey={Math.random()}
+      uniqueKey="posts"
       viewBox="0 0 380 80"
       backgroundColor="#b3b3b3"
       foregroundColor="#e6e6e6"
     >
-      {/* Only SVG shapes */}
       <rect x="0" y="0" rx="3" ry="3" width="30" height="8" />
       <rect x="35" y="0" rx="3" ry="3" width="40" height="8" />
       <rect x="80" y="0" rx="3" ry="3" width="80" height="8" />
@@ -75,6 +71,7 @@ export const CommentLoader = () => {
     <div className="bg-zinc-100 p-4 rounded-xl my-2 w-full">
       <div className="max-w-[1000px]">
         <ContentLoader
+          uniqueKey="comments"
           viewBox="0 0 380 40"
           backgroundColor="#b3b3b3"
           foregroundColor="#e6e6e6"

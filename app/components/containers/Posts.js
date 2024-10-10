@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "../Post";
 import { PostLoader } from "../../content-loaders/all-content-loaders";
-const Posts = () => {
+const Posts = React.memo(() => {
   const [postsData, setPostsData] = useState(null);
   const getPosts = async () => {
     const resonse = await fetch("api/posts", { method: "GET" });
@@ -42,6 +42,6 @@ const Posts = () => {
       </div>
     </>
   );
-};
+});
 
 export default Posts;

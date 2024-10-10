@@ -1,12 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Comment from "../Comment";
-import {
-  CommentLoader,
-  PostLoader,
-} from "../../content-loaders/all-content-loaders";
+import { CommentLoader } from "../../content-loaders/all-content-loaders";
 
-const Comments = ({ slug }) => {
+const Comments = React.memo(({ slug }) => {
   const [commentsData, setCommentsData] = useState(null);
   const [comment, setComment] = useState("");
   const getComments = async () => {
@@ -15,7 +12,7 @@ const Comments = ({ slug }) => {
       body: JSON.stringify({ slug }),
     });
     const data = await res.json();
-    console.log(data);
+
     setCommentsData(data.comments);
   };
   const onChange = (e) => {
@@ -36,7 +33,6 @@ const Comments = ({ slug }) => {
     }
   };
   useEffect(() => {
-    console.log(slug);
     getComments();
   }, []);
 
@@ -81,6 +77,6 @@ const Comments = ({ slug }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Comments;
