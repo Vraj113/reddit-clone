@@ -7,14 +7,17 @@ import { useRouter } from "next/navigation";
 const LeftNavBar = () => {
   const pathname = usePathname();
   const [progress, setProgress] = useState(0);
-  const router = useRouter();
-  useEffect(() => {
-    console.log("useEffect ran");
+
+  const runTopLoadingBar = () => {
     setProgress(30);
     setTimeout(() => {
       setProgress(100);
-    }, 1000);
-  }, [router]);
+    }, 100);
+    1;
+  };
+  useEffect(() => {
+    runTopLoadingBar();
+  }, [pathname]);
 
   return (
     <>
@@ -22,11 +25,12 @@ const LeftNavBar = () => {
         color="#FF4500"
         progress={progress}
         height={5}
+        waitingTime={600}
         style={{
           borderTopRightRadius: "20px",
           borderBottomRightRadius: "20px",
         }}
-        // onLoaderFinished={() => setProgress(100)}
+        onLoaderFinished={() => setProgress(0)}
       />
       <div className="h-full p-4 text-lg fixed z-10 bg-white mt-16 hidden md:block">
         <Link href="/">

@@ -10,8 +10,8 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import Link from "next/link";
 import LinkPreview from "@/app/components/LinkPreview";
 import Image from "next/image";
-
-const Post = async ({ params }) => {
+import Post from "@/app/components/Post";
+const PostwithSlug = async ({ params }) => {
   const post = await prisma.posts.findFirst({
     where: {
       slug: params.postSlug,
@@ -34,91 +34,28 @@ const Post = async ({ params }) => {
   } else {
     return (
       <>
-        <div className="  p-4 border2  md:mt-8 mt-24  shadow-lg  bg-white rounded-lg md:mx-28 mx-2">
-          <div className="flex justify-between">
-            <div className="flex items-center">
-              <div>
-                {
-                  <img
-                    className="rounded-full w-8 h-8 "
-                    src={subredditData.image}
-                  />
-                }
-              </div>
-              <Link href={"/r/" + post.subredditId}>
-                <div className="text-xl ml-2">r/{post.subredditId}</div>
-              </Link>
-            </div>
-            <div>
-              Posted By <b>{post.postedBy}</b>
-              {/* Posted By <b>{user.name ? user.name : "[Deleted Account]"}</b> */}
-            </div>
-          </div>
-          <div className="text-4xl font-semibold">{post.title}</div>
-          <div className="text-lg text-zinc-700 mt-4">{post.description}</div>
-          {post.link && <LinkPreview link={post.link} />}
-          <div className="  overflow-hidden justify-center flex  ">
-            {post.imageURL && (
-              <div className="flex justify-center relative  max-h-[600px] w-full">
-                <Image
-                  className="rounded-xl object-contain"
-                  src={post.imageURL}
-                  alt={post.title}
-                  width={800}
-                  height={500}
-                  style={{ objectFit: "contain" }}
-                />
-              </div>
-            )}
-          </div>
-          <div className="flex gap-x-2   border-2 rounded-full bg-zinc-50 w-fit p-2 border-zinc-500 m-4">
-            <div className="group p-1 px-2 rounded-xl   border-black cursor-pointer ">
-              <div className="group-hover:hidden">
-                <ThumbUpOutlinedIcon />
-              </div>
-              <div className="hidden group-hover:block">
-                <ThumbUpIcon />
-              </div>
-            </div>
-            <div className="p-1 px-2 rounded-xl   border-black cursor-pointer ">
-              {post.votes}
-            </div>
-            <div className=" group p-1 px-2 rounded-xl  border-black cursor-pointer ">
-              <ThumbDownOutlinedIcon className="group-hover:hidden" />
-              <div className="hidden group-hover:block">
-                <ThumbDownIcon />
-              </div>
-            </div>
-            <div className="p-1 px-2 rounded-xl  border-black cursor-pointer pt-2 ">
-              <svg
-                fill="white"
-                height="20"
-                viewBox="-2 -2 52 52"
-                width="20"
-                className=""
-              >
-                <path
-                  clipRule="evenodd"
-                  d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
-                  stroke="black"
-                  strokeWidth="3"
-                ></path>
-              </svg>
-            </div>
-            <div className=" group p-1 px-2 rounded-xl  border-black cursor-pointer ">
-              <div className="group-hover:hidden">
-                <ShareOutlinedIcon />
-              </div>
-              <div className="hidden group-hover:block">
-                <ShareIcon />
-              </div>
-            </div>
-          </div>
+        <div className="    border2  md:mt-8 mt-24  shadow-lg  bg-white hover:bg-zinc-100 rounded-lg md:mx-28 mx-2 w-fit">
+          {post && (
+            <Post
+              key={post.id}
+              title={post.title}
+              description={post.description}
+              link={post.link}
+              postedBy={post.postedBy}
+              votes={post.votes}
+              slug={post.slug}
+              createdAt={post.createdAt}
+              imageURL={post.imageURL}
+              subredditId={post.subredditId}
+              subredditImg={subredditData.image}
+            />
+          )}
         </div>
+
         <Comments slug={params.postSlug} />
       </>
     );
   }
 };
 
-export default Post;
+export default PostwithSlug;

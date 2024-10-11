@@ -1,8 +1,20 @@
+"use client";
 import React from "react";
 import JoinButton from "./JoinButton";
+import { motion } from "framer-motion";
 const SubredditTop = ({ slug, name, description, image, bannerImage }) => {
   return (
-    <div className="mt-8 mr-4">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.5,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 100,
+      }}
+      className="mt-8 mr-4"
+    >
       <div>
         <img className="rounded-xl" src={bannerImage} />
       </div>
@@ -21,7 +33,7 @@ const SubredditTop = ({ slug, name, description, image, bannerImage }) => {
       <div className="border-2 text-lg   p-2 my-4  rounded-xl">
         {description}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

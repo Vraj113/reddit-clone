@@ -2,13 +2,23 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 const ProfileToggle = () => {
   const { data: session, status } = useSession();
   const [profileToggle, setProfileToggle] = useState(false);
 
   return (
-    <div>
+    <div
+      initial={{ scale: 0.75 }}
+      animate={{ scale: 1 }}
+      transition={{
+        duration: 0.5,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 100,
+      }}
+    >
       {" "}
       {status === "authenticated" ? (
         <>
@@ -25,8 +35,13 @@ const ProfileToggle = () => {
         </Link>
       )}
       {profileToggle && (
-        <div className="absolute bg-white p-2 border-2 right-10">
-          <div className="flex items-center gap-x-5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute bg-white p-2 border-2 right-10 shadow-md rounded-lg"
+        >
+          <div className="flex items-center gap-x-5 px-2">
             <img src={session.user.image} className="w-10 h-10 rounded-full" />
             <div>{session.user.name}</div>
           </div>
@@ -43,7 +58,6 @@ const ProfileToggle = () => {
               Settings
             </div>
           </Link>
-
           <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
             Joined Subreddits
           </div>
@@ -53,7 +67,7 @@ const ProfileToggle = () => {
           >
             Logout
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   );
