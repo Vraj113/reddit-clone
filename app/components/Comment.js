@@ -47,13 +47,13 @@ const Comment = ({ name, content, postedOn }) => {
     >
       {" "}
       <div className="bg-zinc-100 p-4 rounded-xl my-2">
-        <div className="flex gap-x-5 text-xl items-center font-semibold">
-          <div>{name}</div>
-          <div className="text-sm">{convertISOToRelativeTime(postedOn)}</div>
+        <div className="flex gap-x-5   items-center font-semibold">
+          <div className="md:text-lg text-md">{name}</div>
+          <div className="text-sm text-zinc-800">
+            {convertISOToRelativeTime(postedOn)}
+          </div>
         </div>
-        <div className="font-semibold text-xl mt-2 text-zinc-700">
-          {content}
-        </div>
+        <div className="  md:text-xl text-md mt-2 text-zinc-800">{content}</div>
         <div className="flex   mt-2     w-fit py-2    ">
           <div className="group p-1 px-2 rounded-xl   border-black cursor-pointer ">
             <div className="group-hover:hidden">

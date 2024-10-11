@@ -22,10 +22,7 @@ const ProfileToggle = () => {
       {" "}
       {status === "authenticated" ? (
         <>
-          <p
-            onClick={() => setProfileToggle(!profileToggle)}
-            className="cursor-pointer"
-          >
+          <p onClick={() => setProfileToggle(false)} className="cursor-pointer">
             {session.user.name}
           </p>
         </>
@@ -39,7 +36,7 @@ const ProfileToggle = () => {
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="absolute bg-white p-2 border-2 right-10 shadow-md rounded-lg"
+          className="fixed z-10 border-2 bg-white p-2  right-10 shadow-md rounded-lg"
         >
           <div className="flex items-center gap-x-5 px-2">
             <img src={session.user.image} className="w-10 h-10 rounded-full" />

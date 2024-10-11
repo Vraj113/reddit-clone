@@ -38,7 +38,7 @@ const Comments = React.memo(({ slug }) => {
 
   return (
     <div>
-      <div className="  p-4 border2  mt-8 shadow-lg  bg-white rounded-lg md:mx-28 mx-2 ">
+      <div className="  p-4 border2  mt-8 shadow-lg  bg-white rounded-3xl md:mx-28 mx-2 ">
         <div className="text-3xl font-semibold">Comments</div>
         <div className="bg-zinc-100 p-4 rounded-xl my-2  font-semibold text-xl flex items-center ">
           <input

@@ -7,16 +7,16 @@ const All = async () => {
 
   return (
     <>
-      <div className="md:mx-16 mx-8 rounded-xl text-3xl font-bold my-4 p-6 bg-white w-fit cursor-pointer">
+      <div className=" rounded-3xl text-3xl font-bold my-4 p-6 bg-white w-fit cursor-pointer">
         All Subreddits
       </div>
-      <div className="flex flex-wrap justify-center   w-fit mx-10 gap-4   ">
+      <div className="flex flex-wrap  justify-start  w-fit   ">
         {allSubs.map((subreddit) => {
           return (
             <Link href={`r/${subreddit.name}`}>
               <div
                 key={subreddit.id}
-                className="max-w-96 rounded-xl p-4 bg-white shadow-lg text-justify hover:bg-zinc-100 cursor-pointer"
+                className="max-w-96 mr-4 mb-4 rounded-3xl p-4 bg-white shadow-lg text-justify hover:bg-zinc-100 cursor-pointer"
               >
                 <div className="flex items-center gap-x-4   my-2">
                   <img

@@ -34,7 +34,7 @@ const LinkPreview = ({ link }) => {
       {error && <p>{error}</p>}
       {previewData ? (
         <div>
-          <div className=" text-lg">{previewData.description}</div>
+          <div className=" md:text-lg text-md">{previewData.description}</div>
           {previewData.images?.length > 0 && (
             <img
               className="rounded-xl max-h-[600px] mt-2"

@@ -61,7 +61,7 @@ const Post = ({
           stiffness: 150,
         }}
       >
-        <div className=" md:w-[800px] w-full my-4  border-b-2 hover:bg-gray-100 bg-white shadow-md  rounded-lg  ">
+        <div className=" md:w-[800px] w-full my-4  border-b-2 hover:bg-gray-100 bg-white shadow-md   rounded-3xl  ">
           {" "}
           <Link href={`/r/${subredditId}/posts/${slug}`}>
             <div className="  p-4  rounded-xl flex flex-col gap-y-3  h-fit py-2 cursor-pointer">
@@ -72,7 +72,7 @@ const Post = ({
                   )}
                 </div>
 
-                <div className="text-xl  flex items-center gap-x-2">
+                <div className="md:text-xl text-sm   flex items-center gap-x-2">
                   <div href={"/r/" + subredditId}>r/{subredditId} </div> •{" "}
                   {convertISOToRelativeTime(createdAt)} • Posted By
                   <b>{postedBy}</b>
@@ -81,12 +81,14 @@ const Post = ({
 
               <div className="text-lg font-semibold">{title}</div>
 
-              {description && <div className="text-xl">{description}</div>}
+              {description && (
+                <div className="text-md md:text-lg">{description}</div>
+              )}
               {link && <LinkPreview link={link} />}
               {imageURL && (
                 <div className="flex justify-center relative  max-h-[500px] w-full">
                   <Image
-                    className="rounded-xl object-contain"
+                    className="rounded-3xl object-contain"
                     src={imageURL}
                     alt={title}
                     width={800}
@@ -97,7 +99,7 @@ const Post = ({
               )}
             </div>
           </Link>
-          <div className="flex gap-x-2   border-2 rounded-full bg-zinc-50 w-fit p-2 border-zinc-500 m-4">
+          <div className="flex gap-x-2   p-2 border-zinc-500 m-4">
             <div className="group p-1 px-2 rounded-xl   border-black cursor-pointer ">
               <div className="group-hover:hidden">
                 <ThumbUpOutlinedIcon />
@@ -156,18 +158,21 @@ const Post = ({
           stiffness: 100,
         }}
       >
-        <div className=" md:w-[800px] w-full my-4  border-b-2 hover:bg-gray-100 bg-white shadow-md  rounded-lg  ">
+        <div className=" md:w-[800px] w-full my-4  border-b-2 hover:bg-gray-100 bg-white shadow-md  rounded-3xl ">
           {" "}
           <div>
             <div className="  p-4  rounded-xl flex flex-col gap-y-3  h-fit py-2 ">
               <div className="flex items-center">
                 <div>
                   {subredditImg && (
-                    <img className="rounded-full w-8 h-8 " src={subredditImg} />
+                    <img
+                      className="rounded-full md:w-8 md:h-8 w-4 h-4 "
+                      src={subredditImg}
+                    />
                   )}
                 </div>
 
-                <div className="text-xl ml-2 flex items-center gap-x-2">
+                <div className="md:text-xl text-sm ml-1  flex items-center gap-x-2">
                   <Link href={"/r/" + subredditId} className="hover:underline">
                     r/{subredditId}{" "}
                   </Link>{" "}
@@ -178,7 +183,7 @@ const Post = ({
 
               <div className="text-lg font-semibold">{title}</div>
 
-              {description && <div className="text-xl">{description}</div>}
+              {description && <div className="text-lg">{description}</div>}
               {link && <LinkPreview link={link} />}
               {imageURL && (
                 <div className="flex justify-center relative  max-h-[500px] w-full">
@@ -194,7 +199,7 @@ const Post = ({
               )}
             </div>
           </div>
-          <div className="flex gap-x-2   border-2 rounded-full bg-zinc-50 w-fit p-2 border-zinc-500 m-4">
+          <div className="flex gap-x-2   p-2 border-zinc-500 m-4">
             <div className="group p-1 px-2 rounded-xl   border-black cursor-pointer ">
               <div className="group-hover:hidden">
                 <ThumbUpOutlinedIcon />
