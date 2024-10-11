@@ -36,9 +36,14 @@ const Comment = ({ name, content, postedOn }) => {
   }
   return (
     <motion.div
-      initial={{ y: 20 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.4 }}
+      initial={{ y: 100 }}
+      whileInView={{ y: 0 }}
+      transition={{
+        duration: 0.5,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 100,
+      }}
     >
       {" "}
       <div className="bg-zinc-100 p-4 rounded-xl my-2">

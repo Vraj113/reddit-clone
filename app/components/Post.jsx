@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
@@ -48,13 +48,19 @@ const Post = ({
 
     return "just now"; // In case the time difference is very small
   }
-
+  const scrollRef = useRef(null);
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      whileHover={{ scale: 1.01 }}
+      initial={{ y: 100 }}
+      // animate={{ opacity: 1, y: 0 }}
+      whileInView={{ y: 0 }}
+      viewport={{ root: scrollRef }}
+      transition={{
+        duration: 0.5,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 150,
+      }}
     >
       <div className=" md:w-[800px] w-full my-4  border-b-2 hover:bg-gray-100 bg-white shadow-md  rounded-lg  ">
         {" "}
