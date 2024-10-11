@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import LoadingBar from "react-top-loading-bar";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 const LeftNavBar = () => {
   const pathname = usePathname();
   const [progress, setProgress] = useState(0);
