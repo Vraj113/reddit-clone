@@ -159,7 +159,7 @@ export const Create = () => {
     }
   };
   return (
-    <div className="flex-col flex gap-y-4   py-4  px-8 bg-zinc-100 min-h-[88vh] ">
+    <div className="flex-col flex gap-y-4   py-4  px-8 bg-white rounded-3xl shadow-md mt-4 ">
       <ToastContainer />
       <div className="font-semibold text-3xl">Create Post</div>
 

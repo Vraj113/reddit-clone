@@ -13,7 +13,7 @@ const SubredditTop = ({ slug, name, description, image, bannerImage }) => {
         type: "spring",
         stiffness: 100,
       }}
-      className="mt-8 mr-4"
+      className="mt-8   bg-white p-4 rounded-3xl"
     >
       <div>
         <img className="rounded-xl" src={bannerImage} />
@@ -30,7 +30,7 @@ const SubredditTop = ({ slug, name, description, image, bannerImage }) => {
           <JoinButton slug={slug} />
         </div>
       </div>
-      <div className=" md:text-lg text-md   p-2 my-4  rounded-xl text-justify">
+      <div className=" md:text-lg text-md    my-4  rounded-xl text-justify">
         {description}
       </div>
     </motion.div>

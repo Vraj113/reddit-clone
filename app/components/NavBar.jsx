@@ -4,7 +4,7 @@ import Link from "next/link";
 const NavBar = async () => {
   // console.log(session);
   return (
-    <div className="flex justify-between px-10 py-2  border-b-2 h-fit items-center fixed w-full top-0 bg-white  z-20">
+    <div className="flex justify-between px-10 py-2  border-b-2 h-fit items-center fixed w-full top-0 bg-white  z-20 rounded-3xl">
       <Link href="/">
         <div>
           <img src="/logo.png" className="h-16 w-auto" />

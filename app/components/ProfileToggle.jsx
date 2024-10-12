@@ -1,12 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import LeftNavBar from "./LeftNavBar";
+import { usePathname } from "next/navigation";
 const ProfileToggle = () => {
   const { data: session, status } = useSession();
   const [profileToggle, setProfileToggle] = useState(false);
+  const pathname = usePathname();
+  useEffect(() => {
+    setProfileToggle(false);
+  }, [pathname]);
 
   return (
     <div
@@ -22,7 +28,10 @@ const ProfileToggle = () => {
       {" "}
       {status === "authenticated" ? (
         <>
-          <p onClick={() => setProfileToggle(false)} className="cursor-pointer">
+          <p
+            onClick={() => setProfileToggle(!profileToggle)}
+            className="cursor-pointer"
+          >
             {session.user.name}
           </p>
         </>
@@ -36,7 +45,7 @@ const ProfileToggle = () => {
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed z-10 border-2 bg-white p-2  right-10 shadow-md rounded-lg"
+          className="md:hidden z-10 border-2 bg-white p-2  right-10 shadow-md rounded-lg fixed"
         >
           <div className="flex items-center gap-x-5 px-2">
             <img src={session.user.image} className="w-10 h-10 rounded-full" />
@@ -45,6 +54,54 @@ const ProfileToggle = () => {
           <p className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
             {session.user.email}
           </p>
+          <Link href="/">
+            <div
+              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
+                pathname === "/" ? "bg-zinc-100" : ""
+              }`}
+            >
+              Home
+            </div>
+          </Link>
+          <Link href="/popular">
+            <div
+              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
+                pathname === "/popular" ? "bg-zinc-100" : ""
+              }`}
+            >
+              {" "}
+              Popular
+            </div>
+          </Link>
+          <Link href="/explore">
+            <div
+              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
+                pathname === "/explore" ? "bg-zinc-100" : ""
+              }`}
+            >
+              {" "}
+              Explore
+            </div>
+          </Link>
+          <Link href="/all">
+            <div
+              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
+                pathname === "/all" ? "bg-zinc-100" : ""
+              }`}
+            >
+              {" "}
+              All
+            </div>
+          </Link>
+          <Link href="/create">
+            <div
+              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
+                pathname === "/create" ? "bg-zinc-100" : ""
+              }`}
+            >
+              Create New Post
+            </div>
+          </Link>
           <Link href="/profile">
             <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
               Profile

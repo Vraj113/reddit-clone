@@ -34,7 +34,7 @@ const PostwithSlug = async ({ params }) => {
   } else {
     return (
       <>
-        <div className="    border2  md:mt-4 rounded-3xl mt-24  shadow-lg  bg-white hover:bg-zinc-100   md:mx-28 mx-2 w-fit">
+        <div className="md:mt-4  l mt-24 bg-zinc-100   md:mx-28 mx-2 ">
           {post && (
             <Post
               key={post.id}
