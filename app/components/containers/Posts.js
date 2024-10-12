@@ -16,14 +16,14 @@ const Posts = React.memo(() => {
   const timesToRender = 5;
   return (
     <>
-      <div className="mt-0 md:mx-28 mx-4">
+      <div className="mt-0 md:mx-28 mx-2">
         {!postsData &&
           Array.from({ length: timesToRender }).map((_, index) => (
             <PostLoader key={index} />
           ))}
       </div>
 
-      <div className="mt-0 md:mx-28 mx-4">
+      <div className="mt-0 md:mx-28 mx-2">
         {postsData &&
           postsData.map((post) => (
             <Post

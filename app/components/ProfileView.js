@@ -18,7 +18,7 @@ const ProfileView = () => {
 
   if (status !== "authenticated") {
     return (
-      <Link href="/api/auth/signin" className="text-xl">
+      <Link href="/api/auth/signin" className="hidden text-xl">
         Login
       </Link>
     );

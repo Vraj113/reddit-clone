@@ -61,7 +61,7 @@ const Post = ({
           stiffness: 150,
         }}
       >
-        <div className=" md:max-w-[800px] w-full my-4  border-b-2 hover:bg-gray-50 bg-white shadow-md   rounded-3xl  ">
+        <div className=" md:max-w-[800px] w-full my-4   hover:bg-gray-50 bg-white shadow-md   rounded-3xl  ">
           {" "}
           <Link href={`/r/${subredditId}/posts/${slug}`}>
             <div className="  p-4  rounded-xl flex flex-col gap-y-3  h-fit py-2 cursor-pointer">
@@ -149,7 +149,7 @@ const Post = ({
   if (subredditImg) {
     return (
       <motion.div
-        initial={{ scale: 0.75 }}
+        initial={{ scale: 0.85 }}
         animate={{ scale: 1 }}
         transition={{
           duration: 0.5,
@@ -158,7 +158,7 @@ const Post = ({
           stiffness: 100,
         }}
       >
-        <div className="  md:max-w-[800px] w-full my-4  border-b-2 hover:bg-gray-50 bg-white shadow-md   rounded-3xl ">
+        <div className="  md:max-w-[800px] w-full my-4   hover:bg-gray-50 bg-white shadow-md   rounded-3xl ">
           {" "}
           <div>
             <div className="  p-4  rounded-xl flex flex-col gap-y-3  h-fit py-2 ">
