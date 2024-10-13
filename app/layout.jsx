@@ -4,7 +4,6 @@ import NavBar from "./components/NavBar";
 import LeftNavBar from "./components/LeftNavBar";
 import { Providers } from "./components/provider/Provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import ProfileToggle from "./components/ProfileToggle";
 import ProfileView from "./components/ProfileView";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

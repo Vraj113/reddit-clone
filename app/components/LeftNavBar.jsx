@@ -24,7 +24,7 @@ const LeftNavBar = () => {
   return (
     <>
       <LoadingBar
-        color="#FF4500"
+        color="#2563EB"
         progress={progress}
         height={5}
         waitingTime={600}

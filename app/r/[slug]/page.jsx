@@ -28,7 +28,7 @@ const SubReddit = async ({ params }) => {
   }
 
   return (
-    <div className="md:mx-28 md:mt-8 mt-24  mx-2">
+    <div className="md:mx-28 md:mt-4 mt-24  mx-2">
       {subredditData && (
         <SubredditTop
           slug={params.slug}
@@ -39,7 +39,9 @@ const SubReddit = async ({ params }) => {
         />
       )}
       <div className="bg-white p-4 rounded-3xl mt-8      ">
-        <div className="text-4xl font-semibold rounded w-fit   ">Posts</div>
+        <div className="font-semibold text-3xl mb-4 text-center border-b-2 pb-2  ">
+          Posts
+        </div>
         {posts.length > 0 ? (
           posts.map((post) => (
             <Post

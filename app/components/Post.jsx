@@ -61,10 +61,10 @@ const Post = ({
           stiffness: 150,
         }}
       >
-        <div className=" md:max-w-[800px] w-full my-4   hover:bg-gray-50 bg-white shadow-md   rounded-3xl  ">
+        <div className=" md:max-w-[800px] w-full my-4   hover:bg-gray-50 bg-white shadow-md   rounded-3xl p-2  ">
           {" "}
           <Link href={`/r/${subredditId}/posts/${slug}`}>
-            <div className="  p-4  rounded-xl flex flex-col gap-y-3  h-fit py-2 cursor-pointer">
+            <div className="  p-4 rounded-xl flex flex-col gap-y-3  h-fit py-2 cursor-pointer">
               <div className="flex items-center">
                 <div>
                   {subredditImg && (
@@ -72,10 +72,14 @@ const Post = ({
                   )}
                 </div>
 
-                <div className="md:text-xl text-sm   flex items-center gap-x-2">
-                  <div href={"/r/" + subredditId}>r/{subredditId} </div> •{" "}
-                  {convertISOToRelativeTime(createdAt)} • Posted By
-                  <b>{postedBy}</b>
+                <div className="md:text-xl text-sm   flex flex-wrap justify-between items-center gap-x-2">
+                  <div href={"/r/" + subredditId}>r/{subredditId} </div>
+                  <div className="text-sm  ml-4">
+                    {convertISOToRelativeTime(createdAt)}
+                  </div>
+                  <div className="text-md">
+                    Posted By <b>{postedBy}</b>
+                  </div>
                 </div>
               </div>
 
@@ -158,26 +162,27 @@ const Post = ({
           stiffness: 100,
         }}
       >
-        <div className="  md:max-w-[800px] w-full my-4   hover:bg-gray-50 bg-white shadow-md   rounded-3xl ">
+        <div className="  md:max-w-[800px] w-full my-4   hover:bg-gray-50 bg-white shadow-md   rounded-3xl p-2">
           {" "}
           <div>
             <div className="  p-4  rounded-xl flex flex-col gap-y-3  h-fit py-2 ">
               <div className="flex items-center">
-                <div>
-                  {subredditImg && (
-                    <img
-                      className="rounded-full md:w-8 md:h-8 w-4 h-4 "
-                      src={subredditImg}
-                    />
-                  )}
-                </div>
-
-                <div className="md:text-xl text-sm ml-1  flex items-center gap-x-2">
-                  <Link href={"/r/" + subredditId} className="hover:underline">
-                    r/{subredditId}{" "}
-                  </Link>{" "}
-                  {convertISOToRelativeTime(createdAt)} • Posted By{" "}
-                  <b>{postedBy}</b>
+                <div className="md:text-xl text-sm   flex flex-wrap justify-between items-center gap-x-4">
+                  <div className="flex gap-x-2 items-center">
+                    {subredditImg && (
+                      <img
+                        className="rounded-full w-8 h-8  "
+                        src={subredditImg}
+                      />
+                    )}
+                    <div href={"/r/" + subredditId}>r/{subredditId} </div>
+                  </div>
+                  <div className="text-sm  ">
+                    {convertISOToRelativeTime(createdAt)}
+                  </div>
+                  <div className="text-md ">
+                    Posted By <b>{postedBy}</b>
+                  </div>
                 </div>
               </div>
 

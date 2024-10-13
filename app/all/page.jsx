@@ -7,24 +7,25 @@ const All = async () => {
 
   return (
     <>
-      <div className=" rounded-3xl text-3xl font-bold my-4 p-6 bg-white cursor-pointer md:max-w-[800px] w-full m-auto">
+      <div className="h-2"></div>
+      <div className=" rounded-3xl text-3xl font-bold   p-6 bg-white cursor-pointer md:max-w-[800px]  mx-2 my-4 ">
         All Subreddits
       </div>
-      <div className="flex flex-wrap    justify-center  md:max-w-[800px] w-full m-auto">
+      <div className="md:flex flex-wrap    justify-evenly  md:max-w-[800px] w-full  ">
         {allSubs.map((subreddit) => {
           return (
             <Link key={subreddit.name} href={`r/${subreddit.name}`}>
               <div
                 key={subreddit.id}
-                className="max-w-96 mr-4 mb-4 rounded-3xl p-4 bg-white shadow-lg text-justify hover:bg-zinc-100 cursor-pointer"
+                className="max-w-96   mb-4 rounded-3xl p-4 bg-white shadow-lg text-justify hover:bg-zinc-100 cursor-pointer mx-2 "
               >
                 <div className="flex items-center gap-x-4   my-2">
                   <img
-                    className="rounded-full w-20 h-20  "
+                    className="rounded-full h-16 w-16 md:w-20 md:h-20  "
                     src={subreddit.image}
                     alt={subreddit.name}
                   />
-                  <div className="text-3xl font-semibold">
+                  <div className="md:text-3xl text-xl font-semibold">
                     r/{subreddit.name}
                   </div>
                 </div>

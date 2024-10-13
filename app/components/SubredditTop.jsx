@@ -13,7 +13,7 @@ const SubredditTop = ({ slug, name, description, image, bannerImage }) => {
         type: "spring",
         stiffness: 100,
       }}
-      className="mt-8   bg-white p-4 rounded-3xl"
+      className="   bg-white p-4 rounded-3xl"
     >
       <div>
         <img className="rounded-xl" src={bannerImage} />

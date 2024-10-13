@@ -25,12 +25,12 @@ const Joined = async () => {
 
   return (
     <>
-      <div className="rounded-3xl my-4 p-6 bg-white md:max-w-[800px] w-full m-auto">
-        <div className="  text-3xl font-semibold    cursor-pointer border-b-2 pb-4 text-center ">
+      <div className="md:rounded-3xl rounded-none my-4 p-6 bg-white md:max-w-[800px]  m-auto  ">
+        <div className="  md:text-3xl text-xl font-semibold    cursor-pointer border-b-2 pb-4 text-center ">
           Joined Subreddits
         </div>
         {user.joinedSubs.length === 0 && (
-          <div className="    bg-white cursor-pointer text-center  text-xl mt-4 ">
+          <div className="bg-white cursor-pointer text-center  text-xl mt-4 ">
             No Subreddits Joined, Please Click{" "}
             <Link className="underline" href="/all">
               here
@@ -39,14 +39,11 @@ const Joined = async () => {
           </div>
         )}
         {user.joinedSubs.length !== 0 && (
-          <div className="flex flex-wrap  justify-start my-4 md:max-w-[800px] w-full m-auto ">
+          <div className="flex flex-wrap  justify-start my-4 md:max-w-[800px] w-full m-auto gap-2 md:gap-4">
             {user.joinedSubs.map((subreddit) => {
               return (
-                <Link href={`r/${subreddit}`}>
-                  <div
-                    key={subreddit}
-                    className="max-w-96 mr-4   rounded-3xl p-4 bg-white shadow-md text-justify hover:bg-zinc-100 cursor-pointer text-2xl font-semibold"
-                  >
+                <Link href={`r/${subreddit}`} key={subreddit}>
+                  <div className="max-w-96    rounded-3xl p-4 bg-white shadow-md text-justify hover:bg-zinc-100 cursor-pointer md:text-2xl text-lg font-semibold">
                     r/{subreddit}
                   </div>
                 </Link>

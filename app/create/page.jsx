@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getSession } from "next-auth/react";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const Create = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const textareaRef = useRef(null);
 
   const [data, setData] = useState({
     email: "",
@@ -54,6 +55,11 @@ export const Create = () => {
   // General input change handler for text inputs
   const onChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
+    if (e.target.name === "description") {
+      const textarea = textareaRef.current;
+      textarea.style.height = "auto"; // Reset the height
+      textarea.style.height = `${textarea.scrollHeight}px`; // Set the height to scrollHeight
+    }
   };
 
   // Separate onChange handler for react-select
@@ -224,11 +230,12 @@ export const Create = () => {
           </div>
           <div>
             <textarea
+              ref={textareaRef}
               placeholder="Description"
               name="description"
               value={data.description}
               onChange={onChange}
-              className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
+              className="outline-1  border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2   resize-none"
             ></textarea>
           </div>
         </div>
