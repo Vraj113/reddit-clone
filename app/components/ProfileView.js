@@ -52,9 +52,11 @@ const ProfileView = () => {
           Settings
         </div>
       </Link>
-      <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
-        Joined Subreddits
-      </div>
+      <Link href="/joined">
+        <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
+          Joined Subreddits
+        </div>
+      </Link>
       <button
         onClick={() => signOut()}
         className="hover:bg-red-600 hover:text-white cursor-pointer rounded p-2 w-full text-left"

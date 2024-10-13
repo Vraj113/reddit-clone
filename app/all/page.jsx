@@ -7,13 +7,13 @@ const All = async () => {
 
   return (
     <>
-      <div className=" rounded-3xl text-3xl font-bold my-4 p-6 bg-white w-fit cursor-pointer">
+      <div className=" rounded-3xl text-3xl font-bold my-4 p-6 bg-white cursor-pointer md:max-w-[800px] w-full m-auto">
         All Subreddits
       </div>
-      <div className="flex flex-wrap  justify-start  w-fit   ">
+      <div className="flex flex-wrap    justify-center  md:max-w-[800px] w-full m-auto">
         {allSubs.map((subreddit) => {
           return (
-            <Link href={`r/${subreddit.name}`}>
+            <Link key={subreddit.name} href={`r/${subreddit.name}`}>
               <div
                 key={subreddit.id}
                 className="max-w-96 mr-4 mb-4 rounded-3xl p-4 bg-white shadow-lg text-justify hover:bg-zinc-100 cursor-pointer"
