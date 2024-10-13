@@ -45,7 +45,7 @@ const Profile = async () => {
         </div>
         {posts.length === 0 && (
           <div className="    bg-white cursor-pointer text-center  text-xl mt-4 ">
-            <div className="mb-2"> No Posts Found </div>
+            <div className="mb-4"> No Posts Found </div>
             <Link
               className="  bg-blue-600 hover:bg-blue-700 p-2 text-white rounded-md px-4 mt-2 "
               href="/create"

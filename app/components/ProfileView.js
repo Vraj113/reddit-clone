@@ -39,11 +39,12 @@ const ProfileView = () => {
         />
         <div>{session?.user?.name}</div>
       </div>
-      <p className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
+
+      <p className="  cursor-pointer rounded p-2 mb-2 mt-1">
         {session?.user?.email}
       </p>
       <Link href="/profile">
-        <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
+        <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 mt-2 mb-2 ">
           Profile
         </div>
       </Link>

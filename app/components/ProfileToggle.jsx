@@ -112,7 +112,7 @@ const ProfileToggle = () => {
               Settings
             </div>
           </Link>
-          <Link className="/joined">
+          <Link href="/joined">
             <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
               Joined Subreddits
             </div>
