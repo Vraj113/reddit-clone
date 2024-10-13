@@ -25,8 +25,8 @@ const Profile = async () => {
 
   return (
     <div>
-      <div className="md:h-4 h-1"></div>
-      <div className="bg-white p-6 rounded-3xl md:max-w-[800px]  my-4 shadow-md mx-2 md:m-auto ">
+      <div className="h-1 md:h-0"></div>
+      <div className="bg-white p-6 rounded-3xl md:max-w-[800px]  my-4 shadow-md mx-2 md:mx-auto ">
         <div className="font-semibold text-3xl mb-4 text-center border-b-2 pb-2">
           Profile
         </div>
@@ -44,7 +44,7 @@ const Profile = async () => {
           </div>
         </div>
       </div>
-      <div className="bg-white p-4 rounded-3xl mt-8  md:max-w-[800px]   my-4 shadow-md mx-2 md:m-auto      ">
+      <div className="bg-white p-4 rounded-3xl mt-8  md:max-w-[800px]   my-4 shadow-md mx-2 md:mx-auto     ">
         <div className="font-semibold text-3xl mb-4 text-center border-b-2 pb-2">
           Posts
         </div>

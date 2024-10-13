@@ -175,7 +175,7 @@ const Post = ({
                         src={subredditImg}
                       />
                     )}
-                    <div href={"/r/" + subredditId}>r/{subredditId} </div>
+                    <Link href={"/r/" + subredditId}>r/{subredditId} </Link>
                   </div>
                   <div className="text-sm  ">
                     {convertISOToRelativeTime(createdAt)}

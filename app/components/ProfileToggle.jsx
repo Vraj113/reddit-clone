@@ -63,7 +63,7 @@ const ProfileToggle = () => {
               Home
             </div>
           </Link>
-          <Link href="/popular">
+          {/* <Link href="/popular">
             <div
               className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
                 pathname === "/popular" ? "bg-zinc-100" : ""
@@ -82,7 +82,7 @@ const ProfileToggle = () => {
               {" "}
               Explore
             </div>
-          </Link>
+          </Link> */}
           <Link href="/all">
             <div
               className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
@@ -107,11 +107,11 @@ const ProfileToggle = () => {
               Profile
             </div>
           </Link>
-          <Link href="/settings">
+          {/* <Link href="/settings">
             <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
               Settings
             </div>
-          </Link>
+          </Link> */}
           <Link href="/joined">
             <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
               Joined Subreddits
