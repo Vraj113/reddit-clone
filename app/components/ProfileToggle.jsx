@@ -30,7 +30,7 @@ const ProfileToggle = () => {
         <>
           <p
             onClick={() => setProfileToggle(!profileToggle)}
-            className="cursor-pointer"
+            className="cursor-pointer text-sm md:text-lg"
           >
             {session.user.name}
           </p>
