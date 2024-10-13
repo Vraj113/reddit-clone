@@ -47,11 +47,11 @@ const ProfileView = () => {
           Profile
         </div>
       </Link>
-      <Link href="/settings">
+      {/* <Link href="/settings">
         <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
           Settings
         </div>
-      </Link>
+      </Link> */}
       <Link href="/joined">
         <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
           Joined Subreddits
