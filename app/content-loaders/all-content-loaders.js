@@ -10,7 +10,7 @@ export const PostLoader = () => (
     <ContentLoader
       uniqueKey="posts"
       viewBox="0 0 380 80"
-      backgroundColor="#b3b3b3"
+      backgroundColor="#0023ad"
       foregroundColor="#e6e6e6"
     >
       <rect x="0" y="0" rx="3" ry="3" width="30" height="8" />
@@ -73,7 +73,7 @@ export const CommentLoader = () => {
         <ContentLoader
           uniqueKey="comments"
           viewBox="0 0 380 40"
-          backgroundColor="#b3b3b3"
+          backgroundColor="#0023ad"
           foregroundColor="#e6e6e6"
         >
           {/* Only SVG shapes */}
