@@ -47,6 +47,18 @@ const LeftNavBar = () => {
             <div> Home</div>
           </div>
         </Link>
+        <Link href="/feed">
+          {" "}
+          <div
+            className={`flex items-center gap-x-2 py-2 px-4 font-semibold  rounded my-2 min-w-48 cursor-pointer hover:bg-gray-100 ${
+              pathname === "/feed" ? "bg-zinc-100" : ""
+            }`}
+          >
+            <ArticleIcon />
+
+            <div> Feed</div>
+          </div>
+        </Link>
         <Link href="/all">
           {" "}
           <div

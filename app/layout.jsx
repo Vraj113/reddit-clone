@@ -5,16 +5,16 @@ import LeftNavBar from "./components/LeftNavBar";
 import { Providers } from "./components/provider/Provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import ProfileView from "./components/ProfileView";
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// const geistSans = localFont({
+//   src: "./fonts/GeistVF.woff",
+//   variable: "--font-geist-sans",
+//   weight: "100 900",
+// });
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
 
 export const metadata = {
   title: "Reddit",
@@ -26,7 +26,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Providers>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`
+             antialiased`}
         >
           <NavBar />
           <div className="md:grid md:grid-flow-col bg-zinc-100 md:grid-cols-[18%_64%_18%]">

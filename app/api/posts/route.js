@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
 import randomstring from "randomstring";
+
 export const GET = async () => {
   const posts = await prisma.posts.findMany({
     orderBy: {
