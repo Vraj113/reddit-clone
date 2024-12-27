@@ -5,8 +5,6 @@ export async function PUT(req) {
   const body = await req.json();
   const link = body?.link;
 
-  console.log(link);
-
   try {
     const previewData = await getLinkPreview(link);
 

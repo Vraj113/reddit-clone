@@ -10,8 +10,8 @@ export const PostLoader = () => (
     <ContentLoader
       uniqueKey="posts"
       viewBox="0 0 380 80"
-      backgroundColor="#0023ad"
-      foregroundColor="#e6e6e6"
+      backgroundColor="#9c9c9c"
+      foregroundColor="#c9c9c9"
     >
       <rect x="0" y="0" rx="3" ry="3" width="30" height="8" />
       <rect x="35" y="0" rx="3" ry="3" width="40" height="8" />

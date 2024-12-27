@@ -75,6 +75,11 @@ export const Create = () => {
     }
   }
   const onSubmit = async () => {
+    if (!data.name || !data.email) {
+      showToast("warning", "Please Login to post");
+      return;
+    }
+
     if (!data.subredditId) {
       showToast("warning", "Please choose a Subreddit");
       return;
@@ -83,6 +88,7 @@ export const Create = () => {
       showToast("warning", "Please fill all the fields");
       return;
     }
+
     if (data.type === "LINK") {
       const isValid = isValidURL(data.link);
       if (!isValid) {
