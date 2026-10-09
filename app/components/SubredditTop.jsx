@@ -1,40 +1,42 @@
 "use client";
-import React from "react";
+
 import JoinButton from "./JoinButton";
 import { motion } from "framer-motion";
-const SubredditTop = ({ slug, name, description, image, bannerImage }) => {
+
+export default function SubredditTop({
+  slug,
+  name,
+  description,
+  image,
+  bannerImage,
+}) {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: 0.5,
-        ease: "easeOut",
-        type: "spring",
-        stiffness: 100,
-      }}
-      className="   bg-white p-4 rounded-3xl"
+    <motion.section
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="card mb-4 overflow-hidden"
     >
-      <div>
-        <img className="rounded-xl" src={bannerImage} />
-      </div>
-      <div className="flex items-center ml-2 mt-4 md:justify-start justify-between">
-        <div className="flex items-center">
+      {bannerImage && (
+        <img
+          src={bannerImage}
+          alt=""
+          className="h-32 w-full object-cover sm:h-40"
+        />
+      )}
+      <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-3">
           <img
             src={image}
-            className="md:w-24   md:h-24 w-12 h-12 rounded-full"
+            alt=""
+            className="h-14 w-14 rounded-full ring-2 ring-white"
           />
-          <div className="md:text-4xl text-xl font-bold ml-2">r/{name}</div>
+          <div>
+            <h1 className="text-xl font-semibold text-slate-900">r/{name}</h1>
+            <p className="text-sm text-slate-600 line-clamp-2">{description}</p>
+          </div>
         </div>
-        <div className="text-lg font-bold ml-4">
-          <JoinButton slug={slug} />
-        </div>
+        <JoinButton slug={slug} />
       </div>
-      <div className=" md:text-lg text-md    my-4  rounded-xl text-justify">
-        {description}
-      </div>
-    </motion.div>
+    </motion.section>
   );
-};
-
-export default SubredditTop;
+}

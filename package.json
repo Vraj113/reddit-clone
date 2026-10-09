@@ -2,8 +2,11 @@
   "name": "reddit-clone",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "npx prisma db push --schema=app/prisma/schema.prisma && npx prisma generate --schema=app/prisma/schema.prisma && next build",
     "start": "next start",
     "lint": "next lint"
@@ -18,7 +21,6 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "@vercel/speed-insights": "^1.0.12",
     "framer-motion": "^11.11.7",
-    "jsonwebtoken": "^9.0.2",
     "link-preview-js": "^2.0.0",
     "next": "14.2.13",
     "next-auth": "^4.24.8",

@@ -1,42 +1,40 @@
 import prisma from "@/lib/prisma";
 import Link from "next/link";
-import React from "react";
+import PageHeader from "@/app/components/ui/PageHeader";
 
-const All = async () => {
-  const allSubs = await prisma.subreddit.findMany({});
+export default async function All() {
+  const allSubs = await prisma.subreddit.findMany({ orderBy: { name: "asc" } });
 
   return (
-    <>
-      <div className="h-2"></div>
-      <div className=" rounded-3xl text-3xl font-bold   p-6 bg-white cursor-pointer md:max-w-[800px]  mx-2 md:mx-auto my-4 ">
-        All Subreddits
-      </div>
-      <div className="md:flex flex-wrap    justify-evenly  md:max-w-[800px]   mx-2 md:mx-auto ">
-        {allSubs.map((subreddit) => {
-          return (
-            <Link key={subreddit.name} href={`r/${subreddit.name}`}>
-              <div
-                key={subreddit.id}
-                className="max-w-96   mb-4 rounded-3xl p-4 bg-white shadow-lg text-justify hover:bg-zinc-100 cursor-pointer mx-2 "
-              >
-                <div className="flex items-center gap-x-4   my-2">
-                  <img
-                    className="rounded-full h-16 w-16 md:w-20 md:h-20  "
-                    src={subreddit.image}
-                    alt={subreddit.name}
-                  />
-                  <div className="md:text-3xl text-xl font-semibold">
+    <div>
+      <PageHeader
+        eyebrow="Discover"
+        title="Communities"
+        description="Browse all subreddits and join the ones you care about."
+      />
+      <div className="grid gap-4 sm:grid-cols-2">
+        {allSubs.map((subreddit) => (
+          <Link key={subreddit.id} href={`/r/${subreddit.name}`}>
+            <article className="card card-hover h-full p-4">
+              <div className="flex items-center gap-3">
+                <img
+                  className="h-12 w-12 rounded-full ring-1 ring-slate-200"
+                  src={subreddit.image}
+                  alt=""
+                />
+                <div>
+                  <h2 className="font-semibold text-slate-900">
                     r/{subreddit.name}
-                  </div>
+                  </h2>
+                  <p className="line-clamp-2 text-sm text-slate-600">
+                    {subreddit.description}
+                  </p>
                 </div>
-                <div className="line-clamp-3">{subreddit.description}</div>
               </div>
-            </Link>
-          );
-        })}
+            </article>
+          </Link>
+        ))}
       </div>
-    </>
+    </div>
   );
-};
-
-export default All;
+}

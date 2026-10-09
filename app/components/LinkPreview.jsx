@@ -1,55 +1,54 @@
 "use client";
-import React, { useEffect, useState } from "react";
 
-const LinkPreview = ({ link }) => {
+import { useEffect, useState } from "react";
+
+export default function LinkPreview({ link }) {
   const [previewData, setPreviewData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getLinkData = async () => {
-      try {
-        const response = await fetch(`/api/preview`, {
-          method: "PUT",
-          body: JSON.stringify({ link: link }),
-        });
-        if (!response.ok) {
-          throw new Error("Failed to fetch preview");
-        }
-        const data = await response.json();
-
-        setPreviewData(data);
-      } catch (err) {
-        console.error("Error fetching link preview:", err);
-        setError("Failed to fetch preview.");
-      }
-    };
-
-    if (link) {
-      getLinkData();
-    }
+    if (!link) return;
+    fetch("/api/preview", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ link }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("preview failed");
+        return res.json();
+      })
+      .then(setPreviewData)
+      .catch(() => setError("Could not load preview."));
   }, [link]);
 
-  return (
-    <div>
-      {error && <p>{error}</p>}
-      {previewData ? (
-        <div>
-          <div className=" md:text-lg text-md">{previewData.description}</div>
-          {previewData.images?.length > 0 && (
-            <img
-              className="rounded-xl max-h-[600px] mt-2"
-              src={previewData.images[0]}
-              alt="Link preview"
-            />
-          )}
-        </div>
-      ) : (
-        <p className="text-xl  h-28 text-center flex items-center justify-center text-zinc-600">
-          Loading preview...
-        </p>
-      )}
-    </div>
-  );
-};
+  if (error) {
+    return (
+      <a href={link} className="text-sm text-orange-700 underline" target="_blank" rel="noreferrer">
+        {link}
+      </a>
+    );
+  }
 
-export default LinkPreview;
+  if (!previewData) {
+    return <div className="h-24 animate-pulse rounded-lg bg-slate-100" />;
+  }
+
+  return (
+    <a
+      href={link}
+      target="_blank"
+      rel="noreferrer"
+      className="block overflow-hidden rounded-xl border border-slate-200 bg-slate-50"
+    >
+      {previewData.images?.[0] && (
+        <img src={previewData.images[0]} alt="" className="max-h-80 w-full object-cover" />
+      )}
+      <div className="p-3">
+        <p className="text-xs text-slate-500">{link}</p>
+        {previewData.description && (
+          <p className="mt-1 line-clamp-2 text-sm text-slate-700">{previewData.description}</p>
+        )}
+      </div>
+    </a>
+  );
+}

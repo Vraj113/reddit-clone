@@ -1,111 +1,75 @@
 "use client";
+
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import LoadingBar from "react-top-loading-bar";
-import HomeIcon from "@mui/icons-material/Home";
-import ArticleIcon from "@mui/icons-material/Article";
-import AddIcon from "@mui/icons-material/Add";
-const LeftNavBar = () => {
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import DynamicFeedOutlinedIcon from "@mui/icons-material/DynamicFeedOutlined";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+
+const sections = [
+  {
+    title: "Browse",
+    links: [
+      { href: "/", label: "Home", icon: HomeOutlinedIcon },
+      { href: "/feed", label: "Your feed", icon: DynamicFeedOutlinedIcon },
+      { href: "/all", label: "Communities", icon: GroupsOutlinedIcon },
+    ],
+  },
+  {
+    title: "Contribute",
+    links: [
+      { href: "/create", label: "Create post", icon: AddCircleOutlineOutlinedIcon },
+    ],
+  },
+];
+
+export default function LeftNavBar() {
   const pathname = usePathname();
   const [progress, setProgress] = useState(0);
 
-  const runTopLoadingBar = () => {
-    setProgress(30);
-    setTimeout(() => {
-      setProgress(100);
-    }, 100);
-    1;
-  };
   useEffect(() => {
-    runTopLoadingBar();
+    setProgress(40);
+    const timer = setTimeout(() => setProgress(100), 150);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   return (
     <>
       <LoadingBar
-        color="#2563EB"
+        color="#ea580c"
         progress={progress}
-        height={5}
-        waitingTime={600}
-        style={{
-          borderTopRightRadius: "20px",
-          borderBottomRightRadius: "20px",
-        }}
+        height={2}
         onLoaderFinished={() => setProgress(0)}
       />
-      <div className="  rounded-3xl m-4  p-4 text-lg fixed z-10 bg-white top-8 mt-16 border-black hidden md:block ">
-        <Link href="/">
-          {" "}
-          <div
-            className={`flex items-center gap-x-2 py-2 px-4 font-semibold  rounded my-2 min-w-48 cursor-pointer hover:bg-gray-100 ${
-              pathname === "/" ? "bg-zinc-100" : ""
-            }`}
-          >
-            <HomeIcon />
-
-            <div> Home</div>
+      <nav className="card p-3">
+        {sections.map((section) => (
+          <div key={section.title} className="mb-3 last:mb-0">
+            <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+              {section.title}
+            </p>
+            <ul className="space-y-0.5">
+              {section.links.map((item) => {
+                const active = pathname === item.href;
+                const Icon = item.icon;
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={`nav-link ${active ? "nav-link-active" : ""}`}
+                    >
+                      <Icon sx={{ fontSize: 18 }} />
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        </Link>
-        <Link href="/feed">
-          {" "}
-          <div
-            className={`flex items-center gap-x-2 py-2 px-4 font-semibold  rounded my-2 min-w-48 cursor-pointer hover:bg-gray-100 ${
-              pathname === "/feed" ? "bg-zinc-100" : ""
-            }`}
-          >
-            <ArticleIcon />
-
-            <div> Feed</div>
-          </div>
-        </Link>
-        <Link href="/all">
-          {" "}
-          <div
-            className={`flex items-center gap-x-2 py-2 px-4 font-semibold  rounded my-2 min-w-48 cursor-pointer hover:bg-gray-100 ${
-              pathname === "/all" ? "bg-zinc-100" : ""
-            }`}
-          >
-            <ArticleIcon />
-
-            <div> All</div>
-          </div>
-        </Link>
-        <Link href="/create">
-          {" "}
-          <div
-            className={`flex items-center gap-x-2 py-2 px-4 font-semibold  rounded my-2 min-w-48 cursor-pointer hover:bg-gray-100 ${
-              pathname === "/create" ? "bg-zinc-100" : ""
-            }`}
-          >
-            <AddIcon />
-
-            <div> Create New Post</div>
-          </div>
-        </Link>
-        {/* <Link href="/popular">
-          <div
-            className={`py-2 px-4 font-semibold  rounded-3xl my-2 min-w-48 cursor-pointer hover:bg-gray-100 ${
-              pathname === "/popular" ? "bg-zinc-100" : ""
-            }`}
-          >
-            {" "}
-            Popular
-          </div>
-        </Link>
-        <Link href="/explore">
-          <div
-            className={`py-2 px-4 font-semibold  rounded-3xl my-2 min-w-48 cursor-pointer hover:bg-gray-100 ${
-              pathname === "/explore" ? "bg-zinc-100" : ""
-            }`}
-          >
-            {" "}
-            Explore
-          </div>
-        </Link> */}
-      </div>
+        ))}
+      </nav>
     </>
   );
-};
-
-export default LeftNavBar;
+}

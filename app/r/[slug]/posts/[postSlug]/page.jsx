@@ -1,61 +1,38 @@
-import React from "react";
 import prisma from "@/lib/prisma";
-import Comments from "../../../../components/containers/Comments";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ShareIcon from "@mui/icons-material/Share";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+import Comments from "@/app/components/containers/Comments";
+import PostDetail from "@/app/components/PostDetail";
 import Link from "next/link";
-import LinkPreview from "@/app/components/LinkPreview";
-import Image from "next/image";
-import Post from "@/app/components/Post";
-const PostwithSlug = async ({ params }) => {
+
+export default async function PostwithSlug({ params }) {
   const post = await prisma.posts.findFirst({
-    where: {
-      slug: params.postSlug,
-    },
-  });
-  const subredditData = await prisma.subreddit.findUnique({
-    where: {
-      name: post.subredditId,
-    },
+    where: { slug: params.postSlug },
   });
 
-  if (!subredditData) {
+  if (!post) {
     return (
-      <>
-        <div className="w-full h-full flex justify-center items-center text-4xl font-semibold">
-          <div className="-mt-10 -ml-10">Something went wrong</div>
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div className="md:mt-0  l mt-20 pt-1 bg-zinc-100   md:mx-28 mx-2 ">
-          {post && (
-            <Post
-              key={post.id}
-              title={post.title}
-              description={post.description}
-              link={post.link}
-              postedBy={post.postedBy}
-              votes={post.votes}
-              slug={post.slug}
-              createdAt={post.createdAt}
-              imageURL={post.imageURL}
-              subredditId={post.subredditId}
-              subredditImg={subredditData.image}
-            />
-          )}
-        </div>
-
-        <Comments slug={params.postSlug} />
-      </>
+      <div className="card p-10 text-center">
+        <h1 className="text-xl font-semibold">Post not found</h1>
+        <Link href="/" className="btn-primary mt-4 inline-flex">
+          Back home
+        </Link>
+      </div>
     );
   }
-};
 
-export default PostwithSlug;
+  const community = await prisma.subreddit.findUnique({
+    where: { name: post.subredditId },
+  });
+
+  return (
+    <div className="w-full space-y-4">
+      <Link
+        href={`/r/${post.subredditId}`}
+        className="inline-flex text-sm font-medium text-slate-600 hover:text-orange-700"
+      >
+        ← r/{post.subredditId}
+      </Link>
+      <PostDetail post={post} community={community} />
+      <Comments slug={params.postSlug} />
+    </div>
+  );
+}

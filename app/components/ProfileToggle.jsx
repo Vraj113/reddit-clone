@@ -1,132 +1,72 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react";
-import { motion } from "framer-motion";
+
+import { useState, useEffect } from "react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import LeftNavBar from "./LeftNavBar";
 import { usePathname } from "next/navigation";
-const ProfileToggle = () => {
+
+const mobileLinks = [
+  { href: "/", label: "Home" },
+  { href: "/feed", label: "Feed" },
+  { href: "/all", label: "Communities" },
+  { href: "/create", label: "Create" },
+  { href: "/profile", label: "Profile" },
+];
+
+export default function ProfileToggle() {
   const { data: session, status } = useSession();
-  const [profileToggle, setProfileToggle] = useState(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
   useEffect(() => {
-    setProfileToggle(false);
+    setOpen(false);
   }, [pathname]);
 
+  if (status !== "authenticated") {
+    return (
+      <Link href="/api/auth/signin" className="btn-secondary">
+        Sign in
+      </Link>
+    );
+  }
+
   return (
-    <div
-      initial={{ scale: 0.75 }}
-      animate={{ scale: 1 }}
-      transition={{
-        duration: 0.5,
-        ease: "easeOut",
-        type: "spring",
-        stiffness: 100,
-      }}
-    >
-      {" "}
-      {status === "authenticated" ? (
-        <>
-          <p
-            onClick={() => setProfileToggle(!profileToggle)}
-            className="cursor-pointer text-sm md:text-lg"
-          >
-            {session.user.name}
-          </p>
-        </>
-      ) : (
-        <Link href="/api/auth/signin" className="text-xl">
-          Login
-        </Link>
-      )}
-      {profileToggle && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          exit={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="md:hidden z-10 border-2 bg-white p-2  right-10 shadow-md rounded-lg fixed"
-        >
-          <div className="flex items-center gap-x-5 px-2">
-            <img src={session.user.image} className="w-10 h-10 rounded-full" />
-            <div>{session.user.name}</div>
-          </div>
-          <p className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
-            {session.user.email}
-          </p>
-          <Link href="/">
-            <div
-              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
-                pathname === "/" ? "bg-zinc-100" : ""
-              }`}
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+      >
+        <img
+          src={session.user?.image}
+          alt=""
+          className="h-7 w-7 rounded-full"
+        />
+        <span className="hidden max-w-[8rem] truncate sm:inline">
+          {session.user?.name}
+        </span>
+      </button>
+
+      {open && (
+        <div className="absolute right-0 z-50 mt-2 w-56 rounded-xl border border-slate-200 bg-white p-2 shadow-lg lg:hidden">
+          {mobileLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="block rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
             >
-              Home
-            </div>
-          </Link>
-          {/* <Link href="/popular">
-            <div
-              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
-                pathname === "/popular" ? "bg-zinc-100" : ""
-              }`}
-            >
-              {" "}
-              Popular
-            </div>
-          </Link>
-          <Link href="/explore">
-            <div
-              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
-                pathname === "/explore" ? "bg-zinc-100" : ""
-              }`}
-            >
-              {" "}
-              Explore
-            </div>
-          </Link> */}
-          <Link href="/all">
-            <div
-              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
-                pathname === "/all" ? "bg-zinc-100" : ""
-              }`}
-            >
-              {" "}
-              All
-            </div>
-          </Link>
-          <Link href="/create">
-            <div
-              className={`hover:bg-zinc-300 cursor-pointer rounded p-2 my-2 ${
-                pathname === "/create" ? "bg-zinc-100" : ""
-              }`}
-            >
-              Create New Post
-            </div>
-          </Link>
-          <Link href="/profile">
-            <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
-              Profile
-            </div>
-          </Link>
-          {/* <Link href="/settings">
-            <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
-              Settings
-            </div>
-          </Link> */}
-          <Link href="/joined">
-            <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
-              Joined Subreddits
-            </div>
-          </Link>
+              {link.label}
+            </Link>
+          ))}
           <button
+            type="button"
             onClick={() => signOut()}
-            className="hover:bg-red-600 hover:text-white cursor-pointer rounded p-2  w-full text-left"
+            className="mt-1 w-full rounded-md px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50"
           >
-            Logout
+            Sign out
           </button>
-        </motion.div>
+        </div>
       )}
     </div>
   );
-};
-
-export default ProfileToggle;
+}

@@ -1,29 +1,34 @@
-import React from "react";
-import ProfileToggle from "../components/ProfileToggle";
 import Link from "next/link";
-const NavBar = async () => {
+import ProfileToggle from "./ProfileToggle";
+
+export default function NavBar() {
   return (
-    <div className="flex justify-around md:justify-between md:px-10 md:py-2  border-b-2 h-20 items-center fixed w-full top-0 bg-white  z-20 ">
-      <Link href="/">
-        <div>
-          <img src="/logo2.png" className="md:h-10 h-6 w-auto" />
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
+      <div className="shell flex h-14 items-center gap-4">
+        <Link href="/" className="flex shrink-0 items-center gap-2">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-600 text-sm font-bold text-white">
+            r
+          </span>
+          <span className="hidden font-semibold text-slate-900 sm:inline">
+            RedditClone
+          </span>
+        </Link>
+
+        <div className="hidden flex-1 md:block">
+          <input
+            type="search"
+            placeholder="Search communities and posts"
+            className="input-pro max-w-xl"
+          />
         </div>
-      </Link>
 
-      <div className="md:block hidden">
-        <input
-          type="text"
-          name=""
-          placeholder="Search Reddit"
-          id=""
-          className="bg-gray-100 w-[500px] h-[40px] rounded-full px-4"
-        />
+        <div className="ml-auto flex items-center gap-2">
+          <Link href="/create" className="btn-primary hidden sm:inline-flex">
+            Create post
+          </Link>
+          <ProfileToggle />
+        </div>
       </div>
-      <div>
-        <ProfileToggle />
-      </div>
-    </div>
+    </header>
   );
-};
-
-export default NavBar;
+}

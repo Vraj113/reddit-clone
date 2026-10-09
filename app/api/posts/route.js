@@ -2,13 +2,21 @@ import { NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
 import randomstring from "randomstring";
 
+export const dynamic = "force-dynamic";
+
 export const GET = async () => {
-  const posts = await prisma.posts.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  return NextResponse.json(posts);
+  try {
+    const posts = await prisma.posts.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+    return NextResponse.json(posts);
+  } catch (error) {
+    console.error("GET /api/posts:", error);
+    return NextResponse.json(
+      { message: "Failed to load posts", posts: [] },
+      { status: 503 }
+    );
+  }
 };
 
 export const POST = async (req) => {

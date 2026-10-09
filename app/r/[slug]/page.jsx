@@ -1,47 +1,35 @@
-import React from "react";
 import prisma from "@/lib/prisma";
 import Post from "@/app/components/Post";
 import SubredditTop from "@/app/components/SubredditTop";
 
-const SubReddit = async ({ params }) => {
-  let posts = [];
-  let subredditData;
-  const subreddit = params.slug;
-  if (subreddit) {
-    subredditData = await prisma.subreddit.findUnique({
-      where: {
-        name: subreddit,
-      },
-    });
+export default async function SubReddit({ params }) {
+  const subredditData = await prisma.subreddit.findUnique({
+    where: { name: params.slug },
+  });
 
-    if (subreddit) {
-      // Fetch posts for the subreddit
-      posts = await prisma.posts.findMany({
-        where: {
-          subredditId: subreddit, // Use the ID from the subreddit data
-        },
-        orderBy: {
-          createdAt: "desc", // Change this to the field you want to sort by
-        },
-      });
-    }
+  const posts = await prisma.posts.findMany({
+    where: { subredditId: params.slug },
+    orderBy: { createdAt: "desc" },
+  });
+
+  if (!subredditData) {
+    return (
+      <div className="card p-10 text-center">
+        <h1 className="text-xl font-semibold">Community not found</h1>
+      </div>
+    );
   }
 
   return (
-    <div className="md:mx-28 md:mt-4 mt-24  mx-2">
-      {subredditData && (
-        <SubredditTop
-          slug={params.slug}
-          name={subredditData.name}
-          description={subredditData.description}
-          image={subredditData.image}
-          bannerImage={subredditData.bannerImage}
-        />
-      )}
-      <div className="bg-white p-4 rounded-3xl mt-8      ">
-        <div className="font-semibold text-3xl mb-4 text-center border-b-2 pb-2  ">
-          Posts
-        </div>
+    <div className="w-full space-y-4">
+      <SubredditTop
+        slug={params.slug}
+        name={subredditData.name}
+        description={subredditData.description}
+        image={subredditData.image}
+        bannerImage={subredditData.bannerImage}
+      />
+      <div className="space-y-3">
         {posts.length > 0 ? (
           posts.map((post) => (
             <Post
@@ -55,14 +43,15 @@ const SubReddit = async ({ params }) => {
               slug={post.slug}
               createdAt={post.createdAt}
               imageURL={post.imageURL}
+              subredditImg={subredditData.image}
             />
           ))
         ) : (
-          <p>No posts found for this subreddit.</p>
+          <div className="card p-8 text-center text-sm text-slate-600">
+            No posts in this community yet.
+          </div>
         )}
       </div>
     </div>
   );
-};
-
-export default SubReddit;
+}

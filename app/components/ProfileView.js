@@ -1,71 +1,55 @@
 "use client";
+
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
-const ProfileView = () => {
+export default function ProfileView() {
   const { data: session, status } = useSession();
-  const [profileToggle, setProfileToggle] = useState(false);
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      setProfileToggle(true);
-    } else {
-      setProfileToggle(false);
-    }
-  }, [status]);
 
   if (status !== "authenticated") {
     return (
-      <Link href="/api/auth/signin" className="hidden text-xl">
-        Login
-      </Link>
+      <div className="card p-4">
+        <h3 className="text-sm font-semibold text-slate-900">Get started</h3>
+        <p className="mt-1 text-xs text-slate-600">
+          Sign in to vote, comment, and personalize your feed.
+        </p>
+        <Link href="/api/auth/signin" className="btn-primary mt-3 w-full">
+          Sign in
+        </Link>
+      </div>
     );
   }
 
   return (
-    <motion.div
-      initial={{ right: -100 }}
-      animate={{ right: 0 }}
-      exit={{ opacity: 0 }}
-      className="rounded-3xl m-4  p-4   fixed z-10 bg-white top-8 right-0 mt-16 border-black hidden md:block"
-    >
-      <div className="flex items-center gap-x-5 px-2">
+    <div className="card p-4">
+      <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
         <img
           src={session?.user?.image || "/default-avatar.png"}
-          alt="User profile"
-          className="w-10 h-10 rounded-full"
+          alt=""
+          className="h-10 w-10 rounded-full ring-2 ring-orange-100"
         />
-        <div>{session?.user?.name}</div>
+        <div className="min-w-0">
+          <p className="truncate text-sm font-semibold text-slate-900">
+            {session?.user?.name}
+          </p>
+          <p className="truncate text-xs text-slate-500">{session?.user?.email}</p>
+        </div>
       </div>
-
-      <p className="  cursor-pointer rounded p-2 mb-2 mt-1">
-        {session?.user?.email}
-      </p>
-      <Link href="/profile">
-        <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 mt-2 mb-2 ">
+      <div className="mt-2 space-y-1 text-sm">
+        <Link href="/profile" className="block rounded-md px-2 py-1.5 text-slate-700 hover:bg-slate-50">
           Profile
-        </div>
-      </Link>
-      {/* <Link href="/settings">
-        <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
-          Settings
-        </div>
-      </Link> */}
-      <Link href="/joined">
-        <div className="hover:bg-zinc-300 cursor-pointer rounded p-2 my-2">
-          Joined Subreddits
-        </div>
-      </Link>
-      <button
-        onClick={() => signOut()}
-        className="hover:bg-red-600 hover:text-white cursor-pointer rounded p-2 w-full text-left"
-      >
-        Logout
-      </button>
-    </motion.div>
+        </Link>
+        <Link href="/joined" className="block rounded-md px-2 py-1.5 text-slate-700 hover:bg-slate-50">
+          Joined communities
+        </Link>
+        <button
+          type="button"
+          onClick={() => signOut()}
+          className="w-full rounded-md px-2 py-1.5 text-left text-red-600 hover:bg-red-50"
+        >
+          Sign out
+        </button>
+      </div>
+    </div>
   );
-};
-
-export default ProfileView;
+}

@@ -1,82 +1,55 @@
 import prisma from "@/lib/prisma";
-import React from "react";
 import Post from "../components/Post";
-import { cookies } from "next/headers";
-import * as jose from "jose";
 import Link from "next/link";
-const Profile = async () => {
-  const cookieStore = cookies();
-  const token =
-    cookieStore.get("next-auth.session-token")?.value ||
-    cookieStore.get("__Secure-next-auth.session-token")?.value;
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import PageHeader from "../components/ui/PageHeader";
 
-  if (!token) {
-    return <div>You are not logged in</div>;
+export default async function Profile() {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email) {
+    return (
+      <div className="card p-8 text-center">
+        <p className="text-slate-700">Sign in to view your profile.</p>
+        <Link href="/api/auth/signin" className="btn-primary mt-4 inline-flex">
+          Sign in
+        </Link>
+      </div>
+    );
   }
-  const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET);
-  const decoded = await jose.jwtVerify(token, secret);
-  const { name, email, picture } = decoded.payload;
 
   const posts = await prisma.posts.findMany({
-    where: {
-      postedByEmail: email,
-    },
+    where: { postedByEmail: session.user.email },
+    orderBy: { createdAt: "desc" },
   });
 
   return (
-    <div>
-      <div className="h-1 md:h-0"></div>
-      <div className="bg-white p-6 rounded-3xl md:max-w-[800px]  my-4 shadow-md mx-2 md:mx-auto ">
-        <div className="font-semibold text-3xl mb-4 text-center border-b-2 pb-2">
-          Profile
+    <div className="w-full space-y-4">
+      <PageHeader eyebrow="Account" title="Profile" />
+      <section className="card flex items-center gap-4 p-6">
+        <img
+          src={session.user.image || "/default-avatar.png"}
+          alt=""
+          className="h-16 w-16 rounded-full ring-2 ring-orange-100"
+        />
+        <div>
+          <p className="text-lg font-semibold text-slate-900">{session.user.name}</p>
+          <p className="text-sm text-slate-500">{session.user.email}</p>
         </div>
-        <div className="md:flex items-center gap-x-4">
-          <div>
-            <img
-              src={picture}
-              className="rounded-full w-24 h-24 m-auto my-2"
-              alt={name}
-            />
+      </section>
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold text-slate-900">Your posts</h2>
+        {posts.length === 0 ? (
+          <div className="card p-8 text-center">
+            <p className="text-sm text-slate-600">You have not posted yet.</p>
+            <Link href="/create" className="btn-primary mt-4 inline-flex">
+              Create a post
+            </Link>
           </div>
-          <div className=" flex flex-col gap-y-4 md:text-xl text-lg">
-            <div>Name: {name}</div>
-            <div>Email: {email}</div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-white p-4 rounded-3xl mt-8  md:max-w-[800px]   my-4 shadow-md mx-2 md:mx-auto     ">
-        <div className="font-semibold text-3xl mb-4 text-center border-b-2 pb-2">
-          Posts
-        </div>
-        {posts.length === 0 && (
-          <div className="    bg-white cursor-pointer text-center  text-xl mt-4 ">
-            <div className="mb-4"> No Posts Found </div>
-            <Link
-              className="  bg-blue-600 hover:bg-blue-700 p-2 text-white rounded-md px-4 mt-2 "
-              href="/create"
-            >
-              Create New Post
-            </Link>{" "}
-          </div>
+        ) : (
+          posts.map((post) => <Post key={post.id} {...post} />)
         )}
-        {posts &&
-          posts.map((post) => (
-            <Post
-              key={post.id}
-              title={post.title}
-              description={post.description}
-              link={post.link}
-              postedBy={post.postedBy}
-              votes={post.votes}
-              slug={post.slug}
-              createdAt={post.createdAt}
-              imageURL={post.imageURL}
-              subredditId={post.subredditId}
-            />
-          ))}
-      </div>
+      </section>
     </div>
   );
-};
-
-export default Profile;
+}

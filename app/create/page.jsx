@@ -174,9 +174,14 @@ export const Create = () => {
     <>
       {" "}
       <div className="h-2 md:h-0"></div>
-      <div className="flex-col flex gap-y-4   py-4  px-8 bg-white rounded-3xl shadow-md mt-4 md:max-w-[800px]    mx-2 md:mx-auto ">
+      <div className="card mx-auto max-w-2xl flex flex-col gap-y-4 p-6 sm:p-8">
         <ToastContainer />
-        <div className="font-semibold text-3xl">Create Post</div>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-orange-600">
+            Publish
+          </p>
+          <h1 className="text-2xl font-semibold text-slate-900">Create post</h1>
+        </div>
 
         <div className="flex gap-x-2 items-center text-lg">
           <div className="text-3xl">r/</div>
@@ -233,7 +238,7 @@ export const Create = () => {
                 placeholder="Title"
                 name="title"
                 value={data.title}
-                className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
+                className="input-pro my-2"
                 onChange={onChange}
               />
             </div>
@@ -244,7 +249,7 @@ export const Create = () => {
                 name="description"
                 value={data.description}
                 onChange={onChange}
-                className="outline-1  border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2   resize-none"
+                className="input-pro my-2 min-h-[120px] resize-none"
               ></textarea>
             </div>
           </div>
@@ -257,7 +262,7 @@ export const Create = () => {
                 placeholder="Title"
                 name="title"
                 value={data.title}
-                className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
+                className="input-pro my-2"
                 onChange={onChange}
               />
             </div>{" "}
@@ -299,7 +304,7 @@ export const Create = () => {
                 placeholder="Title"
                 name="title"
                 value={data.title}
-                className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
+                className="input-pro my-2"
                 onChange={onChange}
               />
             </div>
@@ -308,7 +313,7 @@ export const Create = () => {
                 placeholder="Link"
                 name="link"
                 value={data.link}
-                className="outline-1 border-2 p-2 text-lg rounded-[10px] w-full md:w-[500px] border-zinc-400 my-2"
+                className="input-pro my-2"
                 onChange={onChange}
               ></textarea>
             </div>

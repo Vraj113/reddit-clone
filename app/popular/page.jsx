@@ -1,7 +1,14 @@
-import React from "react";
+import PageHeader from "../components/ui/PageHeader";
 
-const Popular = () => {
-  return <div>{"Popular"}</div>;
-};
-
-export default Popular;
+export default function Popular() {
+  return (
+    <div>
+      <PageHeader
+        eyebrow="Coming soon"
+        title="Popular"
+        description="Trending posts will show up here."
+      />
+      <div className="card p-8 text-sm text-slate-600">Nothing ranked yet.</div>
+    </div>
+  );
+}

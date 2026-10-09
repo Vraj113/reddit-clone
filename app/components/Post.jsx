@@ -1,20 +1,32 @@
 "use client";
+
 import Link from "next/link";
-import React, { useRef } from "react";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ShareIcon from "@mui/icons-material/Share";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
-import LinkPreview from "./LinkPreview";
 import Image from "next/image";
 import { motion } from "framer-motion";
-const Post = ({
+import LinkPreview from "./LinkPreview";
+import VoteBar from "./ui/VoteBar";
+
+function relativeTime(isoString) {
+  const seconds = Math.floor((Date.now() - new Date(isoString)) / 1000);
+  const units = [
+    ["year", 31536000],
+    ["month", 2592000],
+    ["week", 604800],
+    ["day", 86400],
+    ["hour", 3600],
+    ["minute", 60],
+  ];
+  for (const [label, size] of units) {
+    const count = Math.floor(seconds / size);
+    if (count > 0) return `${count} ${label}${count > 1 ? "s" : ""} ago`;
+  }
+  return "just now";
+}
+
+export default function Post({
   title,
-  img,
-  link,
   description,
+  link,
   postedBy,
   votes,
   slug,
@@ -22,234 +34,85 @@ const Post = ({
   imageURL,
   subredditId,
   subredditImg,
-}) => {
-  function convertISOToRelativeTime(isoString) {
-    const date = new Date(isoString);
-    const now = new Date();
-    const seconds = Math.floor((now - date) / 1000);
+}) {
+  const postHref = `/r/${subredditId}/posts/${slug}`;
 
-    const intervals = {
-      year: 31536000, // 365 days
-      month: 2592000, // 30 days
-      week: 604800, // 7 days
-      day: 86400, // 1 day
-      hour: 3600, // 1 hour
-      minute: 60, // 1 minute
-      second: 1, // 1 second
-    };
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="card card-hover overflow-hidden"
+    >
+      <div className="flex">
+        <div className="hidden w-12 shrink-0 flex-col items-center gap-1 border-r border-slate-100 bg-slate-50 py-4 sm:flex">
+          <span className="text-[10px] font-semibold text-slate-500">▲</span>
+          <span className="text-xs font-bold text-slate-800">{votes}</span>
+          <span className="text-[10px] font-semibold text-slate-500">▼</span>
+        </div>
 
-    for (const interval in intervals) {
-      const count = Math.floor(seconds / intervals[interval]);
-      if (count > 0) {
-        return count === 1
-          ? `${count} ${interval} ago`
-          : `${count} ${interval}s ago`;
-      }
-    }
-
-    return "just now"; // In case the time difference is very small
-  }
-  if (!subredditImg) {
-    return (
-      <motion.div
-        initial={{ y: 50 }}
-        whileInView={{ y: 0 }}
-        transition={{
-          duration: 0.5,
-          ease: "easeOut",
-          type: "spring",
-          stiffness: 150,
-        }}
-      >
-        <div className=" md:max-w-[800px] w-full my-4   hover:bg-gray-50 bg-white shadow-md   rounded-3xl p-2  ">
-          {" "}
-          <Link href={`/r/${subredditId}/posts/${slug}`}>
-            <div className="  p-4 rounded-xl flex flex-col gap-y-3  h-fit py-2 cursor-pointer">
-              <div className="flex items-center">
-                <div>
-                  {subredditImg && (
-                    <img className="rounded-full w-8 h-8 " src={subredditImg} />
-                  )}
-                </div>
-
-                <div className="md:text-xl text-sm   flex flex-wrap justify-between items-center gap-x-2">
-                  <div href={"/r/" + subredditId}>r/{subredditId} </div>
-                  <div className="text-sm  ml-4">
-                    {convertISOToRelativeTime(createdAt)}
-                  </div>
-                  <div className="text-md">
-                    Posted By <b>{postedBy}</b>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-lg font-semibold">{title}</div>
-
-              {description && (
-                <div className="text-md md:text-lg">{description}</div>
+        <div className="min-w-0 flex-1">
+          <div className="px-4 pb-3 pt-4">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              {subredditImg ? (
+                <img
+                  src={subredditImg}
+                  alt=""
+                  className="h-6 w-6 rounded-full ring-1 ring-slate-200"
+                />
+              ) : (
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-100 text-[10px] font-bold text-orange-700">
+                  r
+                </span>
               )}
-              {link && <LinkPreview link={link} />}
-              {imageURL && (
-                <div className="flex justify-center relative  max-h-[500px] w-full">
+              <Link
+                href={`/r/${subredditId}`}
+                className="text-xs font-semibold text-slate-900 hover:underline"
+              >
+                r/{subredditId}
+              </Link>
+              <span className="meta-text">•</span>
+              <span className="meta-text">u/{postedBy}</span>
+              <span className="meta-text">•</span>
+              <span className="meta-text">{relativeTime(createdAt)}</span>
+            </div>
+
+            <Link href={postHref} className="group block">
+              <h2 className="mt-2 text-lg font-semibold leading-snug text-slate-900 group-hover:text-orange-700">
+                {title}
+              </h2>
+            </Link>
+
+            {description && (
+              <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-slate-700">
+                {description}
+              </p>
+            )}
+
+            {link && (
+              <div className="mt-3">
+                <LinkPreview link={link} />
+              </div>
+            )}
+
+            {imageURL && (
+              <Link href={postHref} className="block">
+                <div className="relative mt-3 max-h-[420px] w-full overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
                   <Image
-                    className="rounded-3xl object-contain"
+                    className="h-auto w-full object-contain"
                     src={imageURL}
                     alt={title}
-                    width={800}
+                    width={900}
                     height={500}
-                    style={{ objectFit: "contain" }}
                   />
                 </div>
-              )}
-            </div>
-          </Link>
-          <div className="flex gap-x-2   p-2 border-zinc-500 m-4">
-            <div className="group p-1 px-2 rounded-xl   border-black cursor-pointer ">
-              <div className="group-hover:hidden">
-                <ThumbUpOutlinedIcon />
-              </div>
-              <div className="hidden group-hover:block">
-                <ThumbUpIcon />
-              </div>
-            </div>
-            <div className="p-1 px-2 rounded-xl   border-black cursor-pointer ">
-              {votes}
-            </div>
-            <div className=" group p-1 px-2 rounded-xl  border-black cursor-pointer ">
-              <ThumbDownOutlinedIcon className="group-hover:hidden" />
-              <div className="hidden group-hover:block">
-                <ThumbDownIcon />
-              </div>
-            </div>
-            <div className="p-1 px-2 rounded-xl  border-black cursor-pointer pt-2 ">
-              <svg
-                fill="white"
-                height="20"
-                viewBox="-2 -2 52 52"
-                width="20"
-                className=""
-              >
-                <path
-                  clipRule="evenodd"
-                  d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
-                  stroke="black"
-                  strokeWidth="3"
-                ></path>
-              </svg>
-            </div>
-            <div className=" group p-1 px-2 rounded-xl  border-black cursor-pointer ">
-              <div className="group-hover:hidden">
-                <ShareOutlinedIcon />
-              </div>
-              <div className="hidden group-hover:block">
-                <ShareIcon />
-              </div>
-            </div>
+              </Link>
+            )}
           </div>
-        </div>
-      </motion.div>
-    );
-  }
-  if (subredditImg) {
-    return (
-      <motion.div
-        initial={{ scale: 0.85 }}
-        animate={{ scale: 1 }}
-        transition={{
-          duration: 0.5,
-          ease: "easeOut",
-          type: "spring",
-          stiffness: 100,
-        }}
-      >
-        <div className="  md:max-w-[800px] w-full my-4   hover:bg-gray-50 bg-white shadow-md   rounded-3xl p-2">
-          {" "}
-          <div>
-            <div className="  p-4  rounded-xl flex flex-col gap-y-3  h-fit py-2 ">
-              <div className="flex items-center">
-                <div className="md:text-xl text-sm   flex flex-wrap justify-between items-center gap-x-4">
-                  <div className="flex gap-x-2 items-center">
-                    {subredditImg && (
-                      <img
-                        className="rounded-full w-8 h-8  "
-                        src={subredditImg}
-                      />
-                    )}
-                    <Link href={"/r/" + subredditId}>r/{subredditId} </Link>
-                  </div>
-                  <div className="text-sm  ">
-                    {convertISOToRelativeTime(createdAt)}
-                  </div>
-                  <div className="text-md ">
-                    Posted By <b>{postedBy}</b>
-                  </div>
-                </div>
-              </div>
 
-              <div className="text-lg font-semibold">{title}</div>
-
-              {description && <div className="text-lg">{description}</div>}
-              {link && <LinkPreview link={link} />}
-              {imageURL && (
-                <div className="flex justify-center relative  max-h-[500px] w-full">
-                  <Image
-                    className="rounded-xl object-contain"
-                    src={imageURL}
-                    alt={title}
-                    width={800}
-                    height={500}
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="flex gap-x-2   p-2 border-zinc-500 m-4">
-            <div className="group p-1 px-2 rounded-xl   border-black cursor-pointer ">
-              <div className="group-hover:hidden">
-                <ThumbUpOutlinedIcon />
-              </div>
-              <div className="hidden group-hover:block">
-                <ThumbUpIcon />
-              </div>
-            </div>
-            <div className="p-1 px-2 rounded-xl   border-black cursor-pointer ">
-              {votes}
-            </div>
-            <div className=" group p-1 px-2 rounded-xl  border-black cursor-pointer ">
-              <ThumbDownOutlinedIcon className="group-hover:hidden" />
-              <div className="hidden group-hover:block">
-                <ThumbDownIcon />
-              </div>
-            </div>
-            <div className="p-1 px-2 rounded-xl  border-black cursor-pointer pt-2 ">
-              <svg
-                fill="white"
-                height="20"
-                viewBox="-2 -2 52 52"
-                width="20"
-                className=""
-              >
-                <path
-                  clipRule="evenodd"
-                  d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
-                  stroke="black"
-                  strokeWidth="3"
-                ></path>
-              </svg>
-            </div>
-            <div className=" group p-1 px-2 rounded-xl  border-black cursor-pointer ">
-              <div className="group-hover:hidden">
-                <ShareOutlinedIcon />
-              </div>
-              <div className="hidden group-hover:block">
-                <ShareIcon />
-              </div>
-            </div>
-          </div>
+          <VoteBar votes={votes} />
         </div>
-      </motion.div>
-    );
-  }
-};
-export default Post;
+      </div>
+    </motion.article>
+  );
+}

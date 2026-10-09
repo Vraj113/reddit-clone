@@ -1,7 +1,5 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
-const NewUser = () => {
-  return <div>NewUser</div>;
-};
-
-export default NewUser;
+export default function NewUser() {
+  redirect("/createaccount");
+}
